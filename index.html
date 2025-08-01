@@ -86,7 +86,7 @@
             transform: scale(1.05);
         }
 
-        /* Logo mejorado con fallback */
+        /* Logo mejorado - MÁS GRANDE */
         .logo-container {
             display: flex;
             align-items: center;
@@ -94,9 +94,9 @@
         }
 
         .logo-img {
-            height: 55px;
-            width: 55px;
-            border-radius: 12px;
+            height: 60px;
+            width: 60px;
+            border-radius: 15px;
             transition: all 0.3s ease;
             background: linear-gradient(45deg, var(--accent-color), #ff7b6b);
             display: flex;
@@ -104,24 +104,24 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 1.4rem;
-            box-shadow: 0 4px 15px rgba(247, 108, 94, 0.3);
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(247, 108, 94, 0.4);
         }
 
         .logo-img.loaded {
             background: transparent;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
         .logo-text {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             background: linear-gradient(45deg, var(--text-light), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
@@ -193,7 +193,7 @@
             transform: scale(1.1);
         }
 
-        /* Hero Section Mejorada */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             background: var(--gradient);
@@ -365,7 +365,7 @@
             animation: shine 2s linear infinite;
         }
 
-        /* Secciones mejoradas */
+        /* Sections */
         section {
             padding: 5rem 0;
             position: relative;
@@ -862,7 +862,7 @@
             transform: translateY(-3px) scale(1.1);
         }
 
-        /* Animaciones mejoradas */
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -925,11 +925,16 @@
             }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .animate-pulse {
             animation: pulse 2s infinite;
         }
 
-        /* Responsive Design Mejorado */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
@@ -986,14 +991,15 @@
                 font-size: 2rem;
             }
 
+            /* Logo responsivo - MÁS GRANDE en mobile */
             .logo-img {
-                height: 45px;
-                width: 45px;
-                font-size: 1.1rem;
+                height: 50px;
+                width: 50px;
+                font-size: 1.3rem;
             }
 
             .logo-text {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
         }
 
@@ -1016,17 +1022,17 @@
             }
 
             .logo-img {
-                height: 35px;
-                width: 35px;
-                font-size: 0.9rem;
+                height: 40px;
+                width: 40px;
+                font-size: 1rem;
             }
 
             .logo-text {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
         }
 
-        /* Loading Animation Mejorada */
+        /* Loading Animation */
         .loading {
             position: fixed;
             top: 0;
@@ -1047,6 +1053,13 @@
             visibility: hidden;
         }
 
+        .loading-logo {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
         .spinner {
             width: 50px;
             height: 50px;
@@ -1062,17 +1075,6 @@
             font-size: 1.2rem;
             font-weight: 500;
             animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Mejoras adicionales */
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
         }
 
         /* Efectos de partículas */
@@ -1103,29 +1105,504 @@
             }
         }
 
-        /* Hover effects mejorados */
-        .service-card:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
         }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-logo">
+            <i class="fas fa-code"></i>
+        </div>
+        <div class="spinner"></div>
+        <div class="loading-text">Cargando...</div>
+    </div>
 
-        .portfolio-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo LETSCODE MÁS GRANDE -->
+            <a href="#home" class="logo">
+                <div class="logo-container">
+                    <div class="logo-img" id="logo-img">
+                        LC
+                    </div>
+                    <span class="logo-text">LETSCODE</span>
+                </div>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></li>
+                <li><a href="#about" data-en="About" data-es="Acerca">Acerca</a></li>
+                <li><a href="#services" data-en="Services" data-es="Servicios">Servicios</a></li>
+                <li><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portafolio</a></li>
+                <li><a href="#contact" data-en="Contact" data-es="Contacto">Contacto</a></li>
+                <li>
+                    <button class="language-switch" onclick="toggleLanguage()" id="lang-btn">
+                        EN
+                    </button>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
-        /* Gradientes mejorados */
-        .gradient-text {
-            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content" data-aos="fade-right">
+                <h1 data-en="Freelance Developer" data-es="Desarrollador Freelance">Desarrollador Freelance</h1>
+                <p class="subtitle" data-en="Full Stack Developer & UI/UX Designer" data-es="Desarrollador Full Stack & Diseñador UI/UX">Desarrollador Full Stack & Diseñador UI/UX</p>
+                <p data-en="Creating innovative digital solutions with modern technologies. Specialized in web development, mobile apps, and user experience design." data-es="Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.">
+                    Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        <span data-en="View Portfolio" data-es="Ver Portafolio">Ver Portafolio</span>
+                    </a>
+                    <button class="btn btn-secondary" onclick="downloadCV()">
+                        <i class="fas fa-download"></i>
+                        <span data-en="Download CV" data-es="Descargar CV">Descargar CV</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left">
+                <div class="profile-card animate-pulse">
+                    <div class="profile-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 data-en="José Mario Arias" data-es="José Mario Arias">José Mario Arias</h3>
+                    <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
+                        Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        /* Loading screen mejorada */
-        .loading-logo {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-            animation: bounce 1s ease-in-out infinite;
-        }
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="About Me" data-es="Acerca de Mí">Acerca de Mí</h2>
+                <p data-en="Passionate developer with years of experience creating digital solutions" data-es="Desarrollador apasionado con años de experiencia creando soluciones digitales">
+                    Desarrollador apasionado con años de experiencia creando soluciones digitales
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="300" fill="url(#grad1)"/>
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#274C77;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#A3B4C4;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.2)"/>
+                        <text x="200" y="160" text-anchor="middle" fill="white" font-size="40" font-family="Arial">👨‍💻</text>
+                    </svg>
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h3 data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h3>
+                    <p data-en="I'm a freelance developer passionate about creating innovative digital solutions. With expertise in modern web technologies, I help businesses and individuals bring their ideas to life through clean, efficient, and user-friendly applications." data-es="Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.">
+                        Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.
+                    </p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                            <i class="fab fa-html5"></i>
+                            <h4>Frontend</h4>
+                            <p>HTML5, CSS3, JavaScript, React</p>
+                        </div>
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                            <i class="fas fa-server"></i>
+                            <h4>Backend</h4>
+                            <p>Node.js, PHP, Python, Databases</p>
+                        </div>
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4 data-en="Mobile Development" data-es="Desarrollo Móvil">Desarrollo Móvil</h4>
+                            <p>React Native, Flutter</p>
+                        </div>
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+                            <i class="fas fa-palette"></i>
+                            <h4>UI/UX Design</h4>
+                            <p>Figma, Adobe XD, Photoshop</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="My Services" data-es="Mis Servicios">Mis Servicios</h2>
+                <p data-en="Professional services tailored to your needs" data-es="Servicios profesionales adaptados a tus necesidades">
+                    Servicios profesionales adaptados a tus necesidades
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-code"></i>
+                    <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
+                    <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
+                        Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
+                    </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
+                    <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
+                        Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
+                    </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>UI/UX Design</h3>
+                    <p data-en="User-centered design that combines aesthetics with functionality for optimal user experience." data-es="Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.">
+                        Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.
+                    </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3 data-en="E-commerce Solutions" data-es="Soluciones E-commerce">Soluciones E-commerce</h3>
+                    <p data-en="Complete online stores with payment integration, inventory management, and analytics." data-es="Tiendas online completas con integración de pagos, gestión de inventario y análisis.">
+                        Tiendas online completas con integración de pagos, gestión de inventario y análisis.
+                    </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fas fa-search"></i>
+                    <h3 data-en="SEO Optimization" data-es="Optimización SEO">Optimización SEO</h3>
+                    <p data-en="Search engine optimization to improve your website's visibility and organic traffic." data-es="Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.">
+                        Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.
+                    </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <i class="fas fa-tools"></i>
+                    <h3 data-en="Maintenance & Support" data-es="Mantenimiento y Soporte">Mantenimiento y Soporte</h3>
+                    <p data-en="Ongoing maintenance, updates, and technical support for your digital projects." data-es="Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.">
+                        Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="My Portfolio" data-es="Mi Portafolio">Mi Portafolio</h2>
+                <p data-en="Featured projects that showcase my skills and creativity" data-es="Proyectos destacados que muestran mis habilidades y creatividad">
+                    Proyectos destacados que muestran mis habilidades y creatividad
+                </p>
+            </div>
+            
+            <div class="portfolio-filter" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all" data-en="All Projects" data-es="Todos">Todos</button>
+                <button class="filter-btn" data-filter="web" data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</button>
+                <button class="filter-btn" data-filter="mobile" data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</button>
+                <button class="filter-btn" data-filter="design" data-en="UI/UX Design" data-es="Diseño UI/UX">Diseño UI/UX</button>
+            </div>
+
+            <div class="portfolio-grid" id="portfolio-grid">
+                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <i class="fas fa-laptop-code"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="E-commerce Platform" data-es="Plataforma E-commerce">Plataforma E-commerce</h3>
+                        <p data-en="Complete online store with payment integration and admin panel" data-es="Tienda online completa con integración de pagos y panel de administración">
+                            Tienda online completa con integración de pagos y panel de administración
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="Task Management App" data-es="App de Gestión de Tareas">App de Gestión de Tareas</h3>
+                        <p data-en="Cross-platform mobile app for productivity and task management" data-es="App móvil multiplataforma para productividad y gestión de tareas">
+                            App móvil multiplataforma para productividad y gestión de tareas
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-image">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="Analytics Dashboard" data-es="Dashboard de Análisis">Dashboard de Análisis</h3>
+                        <p data-en="Real-time data visualization dashboard with interactive charts" data-es="Dashboard de visualización de datos en tiempo real con gráficos interactivos">
+                            Dashboard de visualización de datos en tiempo real con gráficos interactivos
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="design" data-aos="fade-up" data-aos-delay="400">
+                    <div class="portfolio-image">
+                        <i class="fas fa-palette"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm">
+                                <i class="fab fa-figma"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="Restaurant App Design" data-es="Diseño App Restaurante">Diseño App Restaurante</h3>
+                        <p data-en="Complete UI/UX design for a restaurant ordering mobile application" data-es="Diseño UI/UX completo para una aplicación móvil de pedidos de restaurante">
+                            Diseño UI/UX completo para una aplicación móvil de pedidos de restaurante
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Photoshop</span>
+                            <span class="tech-tag">Illustrator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="500">
+                    <div class="portfolio-image">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="Learning Management System" data-es="Sistema de Gestión de Aprendizaje">Sistema de Gestión de Aprendizaje</h3>
+                        <p data-en="Online education platform with course management and video streaming" data-es="Plataforma de educación online con gestión de cursos y streaming de video">
+                            Plataforma de educación online con gestión de cursos y streaming de video
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="600">
+                    <div class="portfolio-image">
+                        <i class="fas fa-heartbeat"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="Health Tracking App" data-es="App de Seguimiento de Salud">App de Seguimiento de Salud</h3>
+                        <p data-en="Fitness and health monitoring app with wearable device integration" data-es="App de monitoreo de fitness y salud con integración de dispositivos wearables">
+                            App de monitoreo de fitness y salud con integración de dispositivos wearables
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">HealthKit</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="Get In Touch" data-es="Contacto">Contacto</h2>
+                <p data-en="Ready to start your next project? Let's work together!" data-es="¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!">
+                    ¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3 data-en="Contact Information" data-es="Información de Contacto">Información de Contacto</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>josemarioarias12@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+506 6218-5607</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <p>github.com/josemarioarias12</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4 data-en="Location" data-es="Ubicación">Ubicación</h4>
+                            <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form" data-aos="fade-left">
+                    <h3 data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name" data-en="Name" data-es="Nombre">Nombre</label>
+                            <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" data-en="Email" data-es="Correo">Correo</label>
+                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" data-en="Subject" data-es="Asunto">Asunto</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Asunto del mensaje">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" data-en="Message" data-es="Mensaje">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tu mensaje..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/josemarioarias12" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/josemarioarias" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com/josemarioarias" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/josemarioarias" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 LETSCODE - José Mario Arias. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">Todos los derechos reservados.</span></p>
+        </div>
+    </footer>
+
+    <!-- Floating Elements -->
+    <a href="https://wa.me/50662185607" class="whatsapp-float" target="_blank" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button class="scroll-top" id="scroll-top" title="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Global Variables
+        let currentLanguage = 'es';
+        
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Logo con fallback mejorado
+        function initLogo() {
+            const logoImg = document.getElementById('logo-img');
+            const img = new Image();
+            
+            img.onload = function() {
+                logoImg.innerHTML = '';
+                logoImg.appendChild(img);
+                logoImg.classList.add('loaded');
+            };
