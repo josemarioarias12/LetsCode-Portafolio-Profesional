@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,7 +78,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             transition: all 0.3s ease;
         }
 
@@ -87,9 +86,9 @@
             transform: scale(1.05);
         }
 
-        /* Estilos específicos para el logo imagen */
+        /* Estilos específicos para el logo imagen - ACTUALIZADO */
         .logo-img {
-            height: 45px;
+            height: 60px; /* Aumentado de 45px a 60px */
             width: auto;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -98,8 +97,13 @@
         .logo-text {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.6rem; /* Aumentado de 1.3rem a 1.6rem */
             margin-left: 0.5rem;
+            background: linear-gradient(45deg, #ffffff, #A3B4C4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .nav-menu {
@@ -739,11 +743,11 @@
 
             /* Logo responsivo */
             .logo-img {
-                height: 35px;
+                height: 50px; /* Aumentado de 35px a 50px */
             }
 
             .logo-text {
-                font-size: 1.1rem;
+                font-size: 1.4rem; /* Aumentado de 1.1rem a 1.4rem */
             }
         }
 
@@ -774,11 +778,11 @@
             }
 
             .logo-img {
-                height: 30px;
+                height: 40px; /* Aumentado de 30px a 40px */
             }
 
             .logo-text {
-                font-size: 1rem;
+                font-size: 1.2rem; /* Aumentado de 1rem a 1.2rem */
             }
         }
 
@@ -826,10 +830,10 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <!-- Logo actualizado con imagen -->
+            <!-- Logo actualizado con imagen y texto "LetsCode" -->
             <a href="#home" class="logo">
                 <img src="./letscodelogo.png" alt="LetsCode Logo" class="logo-img">
-                <span class="logo-text">José Mario</span>
+                <span class="logo-text">LetsCode</span>
             </a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></li>
