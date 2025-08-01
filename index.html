@@ -79,6 +79,26 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilos específicos para el logo imagen */
+        .logo-img {
+            height: 45px;
+            width: auto;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-left: 0.5rem;
         }
 
         .nav-menu {
@@ -715,6 +735,15 @@
             .section-title h2 {
                 font-size: 2rem;
             }
+
+            /* Logo responsivo */
+            .logo-img {
+                height: 35px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -741,6 +770,14 @@
 
             .portfolio-item {
                 min-width: auto;
+            }
+
+            .logo-img {
+                height: 30px;
+            }
+
+            .logo-text {
+                font-size: 1rem;
             }
         }
 
@@ -788,9 +825,10 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
+            <!-- Logo actualizado con imagen -->
             <a href="#home" class="logo">
-                <i class="fas fa-code"></i>
-                José Mario
+                <img src="./letscodelogo.png" alt="LetsCode Logo" class="logo-img">
+                <span class="logo-text">José Mario</span>
             </a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></li>
@@ -836,6 +874,90 @@
                         <i class="fas fa-user-tie"></i>
                     </div>
                     <h3 data-en="José Mario Arias" data-es="José Mario Arias">José Mario Arias</h3>
+                    <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
+                        Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="About Me" data-es="Acerca de Mí">Acerca de Mí</h2>
+                <p data-en="Passionate developer with years of experience creating digital solutions" data-es="Desarrollador apasionado con años de experiencia creando soluciones digitales">
+                    Desarrollador apasionado con años de experiencia creando soluciones digitales
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="300" fill="url(#grad1)"/>
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#274C77;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#A3B4C4;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.2)"/>
+                        <text x="200" y="160" text-anchor="middle" fill="white" font-size="40" font-family="Arial">👨‍💻</text>
+                    </svg>
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h3 data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h3>
+                    <p data-en="I'm a freelance developer passionate about creating innovative digital solutions. With expertise in modern web technologies, I help businesses and individuals bring their ideas to life through clean, efficient, and user-friendly applications." data-es="Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.">
+                        Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.
+                    </p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                            <i class="fab fa-html5"></i>
+                            <h4>Frontend</h4>
+                            <p>HTML5, CSS3, JavaScript, React</p>
+                        </div>
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                            <i class="fas fa-server"></i>
+                            <h4>Backend</h4>
+                            <p>Node.js, PHP, Python, Databases</p>
+                        </div>
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4 data-en="Mobile Development" data-es="Desarrollo Móvil">Desarrollo Móvil</h4>
+                            <p>React Native, Flutter</p>
+                        </div>
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+                            <i class="fas fa-palette"></i>
+                            <h4>UI/UX Design</h4>
+                            <p>Figma, Adobe XD, Photoshop</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="My Services" data-es="Mis Servicios">Mis Servicios</h2>
+                <p data-en="Professional services tailored to your needs" data-es="Servicios profesionales adaptados a tus necesidades">
+                    Servicios profesionales adaptados a tus necesidades
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-code"></i>
+                    <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
+                    <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
+                        Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
+                    </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
                     <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
                         Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
                     </p>
@@ -1477,86 +1599,4 @@
         );
     </script>
 </body>
-</html>-en="Freelance Developer" data-es="Desarrollador Freelance">Desarrollador Freelance</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="About Me" data-es="Acerca de Mí">Acerca de Mí</h2>
-                <p data-en="Passionate developer with years of experience creating digital solutions" data-es="Desarrollador apasionado con años de experiencia creando soluciones digitales">
-                    Desarrollador apasionado con años de experiencia creando soluciones digitales
-                </p>
-            </div>
-            <div class="about-content">
-                <div class="about-image" data-aos="fade-right">
-                    <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="400" height="300" fill="url(#grad1)"/>
-                        <defs>
-                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#274C77;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#A3B4C4;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.2)"/>
-                        <text x="200" y="160" text-anchor="middle" fill="white" font-size="40" font-family="Arial">👨‍💻</text>
-                    </svg>
-                </div>
-                <div class="about-text" data-aos="fade-left">
-                    <h3 data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h3>
-                    <p data-en="I'm a freelance developer passionate about creating innovative digital solutions. With expertise in modern web technologies, I help businesses and individuals bring their ideas to life through clean, efficient, and user-friendly applications." data-es="Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.">
-                        Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.
-                    </p>
-                    
-                    <div class="skills-grid">
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                            <i class="fab fa-html5"></i>
-                            <h4>Frontend</h4>
-                            <p>HTML5, CSS3, JavaScript, React</p>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                            <i class="fas fa-server"></i>
-                            <h4>Backend</h4>
-                            <p>Node.js, PHP, Python, Databases</p>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                            <i class="fas fa-mobile-alt"></i>
-                            <h4 data-en="Mobile Development" data-es="Desarrollo Móvil">Desarrollo Móvil</h4>
-                            <p>React Native, Flutter</p>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-palette"></i>
-                            <h4>UI/UX Design</h4>
-                            <p>Figma, Adobe XD, Photoshop</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="My Services" data-es="Mis Servicios">Mis Servicios</h2>
-                <p data-en="Professional services tailored to your needs" data-es="Servicios profesionales adaptados a tus necesidades">
-                    Servicios profesionales adaptados a tus necesidades
-                </p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-code"></i>
-                    <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
-                    <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
-                        Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
-                    </p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
-                    <p data
+</html>
