@@ -1419,15 +1419,12 @@
         });
 
         // Download CV Function
-        function downloadCV() {
-            const link = document.createElement('a');
-            link.href = 'PLANTILLA CV Portafolio Profesional.pdf';
-            link.download = 'Jose_Mario_Arias_CV.pdf';
-            
-            // Create a simple CV content for demo
-            const cvContent = `
-                José Mario Arias - Curriculum Vitae
-                
+         function downloadCV() {
+    const link = document.createElement('a');
+    link.href = 'PLANTILLA CV Portafolio Profesional.pdf'; 
+    link.download = 'Jose_Mario_Arias_CV.pdf';             
+    link.click();
+  }
                 Desarrollador Freelance
                 Email: josemarioarias12@gmail.com
                 WhatsApp: +506 6218-5607
@@ -1605,6 +1602,7 @@
     </script>
 </body>
 </html>
+
 
 
 
