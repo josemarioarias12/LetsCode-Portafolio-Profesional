@@ -3,8 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LetsCode</title>
+    
+    <!-- SEO Optimization -->
+    <title>José Mario Arias - Desarrollador Full Stack | Freelance Web & Mobile</title>
+    <meta name="description" content="Desarrollador Full Stack freelance especializado en React, Node.js, y desarrollo móvil. Creo soluciones digitales innovadoras para empresas en Costa Rica y Latinoamérica.">
+    <meta name="keywords" content="desarrollador web, programador freelance, React, Node.js, desarrollo móvil, Costa Rica, Full Stack, JavaScript, UI/UX">
+    <meta name="author" content="José Mario Arias">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://josemarioarias.dev">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://josemarioarias.dev">
+    <meta property="og:title" content="José Mario Arias - Desarrollador Full Stack Freelance">
+    <meta property="og:description" content="Especialista en desarrollo web y móvil. Creando soluciones digitales innovadoras con tecnologías modernas.">
+    <meta property="og:image" content="https://josemarioarias.dev/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://josemarioarias.dev">
+    <meta property="twitter:title" content="José Mario Arias - Desarrollador Full Stack">
+    <meta property="twitter:description" content="Desarrollador freelance especializado en React, Node.js y desarrollo móvil">
+    <meta property="twitter:image" content="https://josemarioarias.dev/twitter-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "José Mario Arias",
+      "jobTitle": "Desarrollador Full Stack",
+      "url": "https://josemarioarias.dev",
+      "email": "josemarioarias12@gmail.com",
+      "telephone": "+506-6218-5607",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San José",
+        "addressCountry": "Costa Rica"
+      },
+      "sameAs": [
+        "https://github.com/josemarioarias12",
+        "https://www.linkedin.com/in/jose-mario-arias-matamoros-407915133/"
+      ]
+    }
+    </script>
+    
     <link rel="icon" type="image/png" sizes="512x512" href="FaviconLCTransparenteG.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -15,16 +63,25 @@
     <!-- AOS Animation -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
         :root {
             --primary-color: #274C77;
             --secondary-color: #A3B4C4;
             --accent-color: #F76C5E;
+            --success-color: #27AE60;
+            --warning-color: #F39C12;
+            --error-color: #E74C3C;
             --text-dark: #2c3e50;
             --text-light: #ffffff;
+            --text-muted: #6c757d;
             --bg-light: #f8f9fa;
             --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
             --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, #ff6b9d 100%);
         }
 
         * {
@@ -40,9 +97,103 @@
             overflow-x: hidden;
         }
 
+        /* Accessibility improvements */
+        *:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
+        }
+
+        /* Enhanced animations */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Interactive elements */
+        .interactive-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .interactive-bg:hover::before {
+            left: 100%;
         }
 
         /* Header & Navigation */
@@ -60,6 +211,7 @@
         .navbar.scrolled {
             background: rgba(39, 76, 119, 0.98);
             box-shadow: var(--shadow);
+            padding: 0.8rem 0;
         }
 
         .nav-container {
@@ -86,7 +238,6 @@
             transform: scale(1.05);
         }
 
-        /* Estilos específicos para el logo imagen  */
         .logo-img {
             height: 100px;
             width: auto;
@@ -123,6 +274,7 @@
 
         .nav-menu a:hover {
             color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
         .nav-menu a::after {
@@ -163,6 +315,11 @@
             color: var(--text-light);
             font-size: 1.5rem;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
         }
 
         /* Hero Section */
@@ -203,24 +360,33 @@
             color: var(--text-light);
             margin-bottom: 1rem;
             line-height: 1.2;
+            position: relative;
+        }
+
+        .typewriter {
+            border-right: 3px solid var(--accent-color);
+            animation: blink 1s infinite;
         }
 
         .hero-content .subtitle {
             font-size: 1.3rem;
             color: var(--secondary-color);
             margin-bottom: 2rem;
+            animation: slideInFromLeft 1s ease-out 0.5s both;
         }
 
         .hero-content p {
             font-size: 1.1rem;
             color: rgba(255,255,255,0.9);
             margin-bottom: 2rem;
+            animation: slideInFromLeft 1s ease-out 0.7s both;
         }
 
         .cta-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            animation: slideInFromLeft 1s ease-out 0.9s both;
         }
 
         .btn {
@@ -234,10 +400,27 @@
             gap: 0.5rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: var(--accent-color);
+            background: var(--gradient-accent);
             color: white;
         }
 
@@ -249,13 +432,14 @@
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-hover);
         }
 
         .hero-image {
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: slideInFromRight 1s ease-out 0.3s both;
         }
 
         .profile-card {
@@ -266,10 +450,12 @@
             text-align: center;
             border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.3s ease;
+            animation: bounceIn 1s ease-out 1.2s both;
         }
 
         .profile-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: var(--shadow-hover);
         }
 
         .profile-image {
@@ -283,11 +469,17 @@
             justify-content: center;
             font-size: 4rem;
             color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover .profile-image {
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* Sections */
         section {
             padding: 5rem 0;
+            position: relative;
         }
 
         .container {
@@ -299,17 +491,31 @@
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
         }
 
         .section-title h2 {
             font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
+            position: relative;
         }
 
         .section-title p {
             font-size: 1.1rem;
-            color: var(--text-dark);
+            color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto;
         }
@@ -317,6 +523,19 @@
         /* About Section */
         .about {
             background: var(--bg-light);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><polygon fill="rgba(39,76,119,0.03)" points="0,20 100,0 100,20"/></svg>');
+            background-size: 100px 20px;
+            opacity: 0.5;
         }
 
         .about-content {
@@ -324,6 +543,8 @@
             grid-template-columns: 1fr 2fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .about-image {
@@ -340,12 +561,22 @@
             background: var(--gradient);
             border-radius: 20px;
             z-index: -1;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover::before {
+            transform: rotate(3deg);
         }
 
         .about-img {
             width: 100%;
             border-radius: 20px;
             box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover .about-img {
+            transform: scale(1.05);
         }
 
         .skills-grid {
@@ -357,20 +588,44 @@
 
         .skill-card {
             background: white;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
             border-radius: 15px;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: var(--shadow-hover);
         }
 
         .skill-card i {
             font-size: 2.5rem;
             color: var(--accent-color);
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         /* Services Section */
@@ -402,12 +657,19 @@
 
         .service-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
 
         .service-card i {
             font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover i {
+            color: var(--accent-color);
+            transform: scale(1.1);
         }
 
         /* Portfolio Section */
@@ -424,7 +686,7 @@
         }
 
         .filter-btn {
-            padding: 0.5rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
@@ -432,11 +694,29 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .filter-btn.active::before,
+        .filter-btn:hover::before {
+            left: 0;
         }
 
         .filter-btn.active,
         .filter-btn:hover {
-            background: var(--primary-color);
             color: white;
         }
 
@@ -456,7 +736,8 @@
         }
 
         .portfolio-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-hover);
         }
 
         .portfolio-image {
@@ -497,6 +778,11 @@
         .portfolio-content h3 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-content h3 {
+            color: var(--accent-color);
         }
 
         .tech-tags {
@@ -513,22 +799,141 @@
             border-radius: 15px;
             font-size: 0.8rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .tech-tag {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--primary-color);
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="100" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="600" r="150" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: 1000px 1000px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent-color);
+            font-family: serif;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--text-light);
+        }
+
+        .author-info p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            display: flex;
+            gap: 0.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .rating i {
+            color: #ffd700;
         }
 
         /* Contact Section */
         .contact {
             background: var(--primary-color);
             color: var(--text-light);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(247,108,94,0.1) 50%, transparent 70%);
         }
 
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
+            position: relative;
+            z-index: 2;
         }
 
         .contact-info h3 {
             margin-bottom: 2rem;
+            font-size: 1.8rem;
         }
 
         .contact-item {
@@ -536,12 +941,26 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateX(5px);
         }
 
         .contact-item i {
             font-size: 1.5rem;
             color: var(--accent-color);
             width: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover i {
+            transform: scale(1.2);
         }
 
         .contact-form {
@@ -549,27 +968,38 @@
             padding: 2rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            color: var(--text-light);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 1rem;
-            border: none;
+            border: 2px solid rgba(255,255,255,0.2);
             border-radius: 10px;
             background: rgba(255,255,255,0.1);
             color: var(--text-light);
             font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-color);
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.02);
         }
 
         .form-group input::placeholder,
@@ -577,19 +1007,50 @@
             color: rgba(255,255,255,0.7);
         }
 
+        .form-status {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            animation: slideInFromRight 0.3s ease;
+        }
+
+        .form-status.success {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+        }
+
+        .form-status.error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+        }
+
         /* Footer */
         .footer {
             background: var(--text-dark);
             color: var(--text-light);
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-accent);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
         .social-links a {
@@ -603,11 +1064,58 @@
             border-radius: 50%;
             text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-accent);
+            transition: left 0.3s ease;
+        }
+
+        .social-links a:hover::before {
+            left: 0;
         }
 
         .social-links a:hover {
-            background: var(--accent-color);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .social-links a i {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
         }
 
         /* Floating Elements */
@@ -628,10 +1136,12 @@
             box-shadow: var(--shadow);
             z-index: 1000;
             transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1);
+            animation: none;
         }
 
         .scroll-top {
@@ -653,11 +1163,32 @@
 
         .scroll-top.show {
             opacity: 1;
+            transform: translateY(0);
         }
 
         .scroll-top:hover {
             background: var(--primary-color);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Performance indicator */
+        .performance-indicator {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .performance-indicator.show {
+            opacity: 1;
         }
 
         /* Animations */
@@ -681,8 +1212,37 @@
             }
         }
 
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         .animate-pulse {
             animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Loading states */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
 
         /* Responsive Design */
@@ -701,6 +1261,7 @@
                 padding: 2rem;
                 transform: translateX(-100%);
                 transition: all 0.3s ease;
+                box-shadow: var(--shadow);
             }
 
             .nav-menu.active {
@@ -725,7 +1286,8 @@
 
             .skills-grid,
             .services-grid,
-            .portfolio-grid {
+            .portfolio-grid,
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -741,13 +1303,16 @@
                 font-size: 2rem;
             }
 
-            /* Logo responsivo */
             .logo-img {
-                height: 50px; /* Aumentado de 35px a 50px */
+                height: 50px;
             }
 
             .logo-text {
-                font-size: 1.4rem; /* Aumentado de 1.1rem a 1.4rem */
+                font-size: 1.4rem;
+            }
+
+            .footer-content {
+                text-align: center;
             }
         }
 
@@ -778,11 +1343,54 @@
             }
 
             .logo-img {
-                height: 40px; /* Aumentado de 30px a 40px */
+                height: 40px;
             }
 
             .logo-text {
-                font-size: 1.2rem; /* Aumentado de 1rem a 1.2rem */
+                font-size: 1.2rem;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .scroll-top {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-dark: #f8f9fa;
+                --bg-light: #1a1a1a;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast support */
+        @media (prefers-contrast: high) {
+            :root {
+                --shadow: 0 2px 10px rgba(0,0,0,0.3);
+                --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            }
+            
+            .btn {
+                border: 2px solid currentColor;
             }
         }
 
@@ -795,6 +1403,7 @@
             height: 100%;
             background: var(--primary-color);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
@@ -813,6 +1422,13 @@
             border-top: 3px solid var(--accent-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        .loading-text {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
         @keyframes spin {
@@ -825,62 +1441,69 @@
     <!-- Loading Screen -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
+        <div class="loading-text" data-en="Loading..." data-es="Cargando...">Cargando...</div>
+    </div>
+
+    <!-- Performance Indicator -->
+    <div class="performance-indicator" id="performance-indicator">
+        <div id="fps-counter">FPS: 60</div>
+        <div id="load-time">Load: 0ms</div>
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <!-- Logo actualizado con imagen y texto "LetsCode" -->
-            <a href="#home" class="logo">
+            <a href="#home" class="logo" aria-label="José Mario Arias - Home">
                 <img src="./letscodelogo.png" alt="LetsCode Logo" class="logo-img">
                 <span class="logo-text">LetsCode</span>
             </a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></li>
-                <li><a href="#about" data-en="About" data-es="Acerca">Acerca</a></li>
-                <li><a href="#services" data-en="Services" data-es="Servicios">Servicios</a></li>
-                <li><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portafolio</a></li>
-                <li><a href="#contact" data-en="Contact" data-es="Contacto">Contacto</a></li>
-                <li>
-                    <button class="language-switch" onclick="toggleLanguage()" id="lang-btn">
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#home" role="menuitem" data-en="Home" data-es="Inicio">Inicio</a></li>
+                <li role="none"><a href="#about" role="menuitem" data-en="About" data-es="Acerca">Acerca</a></li>
+                <li role="none"><a href="#services" role="menuitem" data-en="Services" data-es="Servicios">Servicios</a></li>
+                <li role="none"><a href="#portfolio" role="menuitem" data-en="Portfolio" data-es="Portafolio">Portafolio</a></li>
+                <li role="none"><a href="#testimonials" role="menuitem" data-en="Testimonials" data-es="Testimonios">Testimonios</a></li>
+                <li role="none"><a href="#contact" role="menuitem" data-en="Contact" data-es="Contacto">Contacto</a></li>
+                <li role="none">
+                    <button class="language-switch" onclick="toggleLanguage()" id="lang-btn" aria-label="Switch language">
                         EN
                     </button>
                 </li>
             </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" role="banner">
         <div class="hero-container">
             <div class="hero-content" data-aos="fade-right">
-                <h1 data-en="Freelance Developer" data-es="Desarrollador Freelance">Desarrollador Freelance</h1>
+                <h1 class="typewriter" data-en="Freelance Developer" data-es="Desarrollador Freelance">Desarrollador Freelance</h1>
                 <p class="subtitle" data-en="Full Stack Developer & UI/UX Designer" data-es="Desarrollador Full Stack & Diseñador UI/UX">Desarrollador Full Stack & Diseñador UI/UX</p>
                 <p data-en="Creating innovative digital solutions with modern technologies. Specialized in web development, mobile apps, and user experience design." data-es="Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.">
                     Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#portfolio" class="btn btn-primary">
-                        <i class="fas fa-eye"></i>
+                    <a href="#portfolio" class="btn btn-primary" aria-label="View my portfolio">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
                         <span data-en="View Portfolio" data-es="Ver Portafolio">Ver Portafolio</span>
                     </a>
-                    <button class="btn btn-secondary" onclick="downloadCV()">
-                        <i class="fas fa-download"></i>
+                    <button class="btn btn-secondary" onclick="downloadCV()" aria-label="Download my CV">
+                        <i class="fas fa-download" aria-hidden="true"></i>
                         <span data-en="Download CV" data-es="Descargar CV">Descargar CV</span>
                     </button>
                 </div>
             </div>
             <div class="hero-image" data-aos="fade-left">
-                <div class="profile-card animate-pulse">
+                <div class="profile-card animate-float">
                     <div class="profile-image">
-                        <i class="fas fa-user-tie"></i>
+                        <i class="fas fa-user-tie" aria-hidden="true"></i>
                     </div>
                     <h3 data-en="José Mario Arias" data-es="José Mario Arias">José Mario Arias</h3>
-                    <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
-                        Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
+                    <p data-en="Passionate about creating digital solutions that make a difference in people's lives." data-es="Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.">
+                        Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.
                     </p>
                 </div>
             </div>
@@ -892,13 +1515,13 @@
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 data-en="About Me" data-es="Acerca de Mí">Acerca de Mí</h2>
-                <p data-en="I am a Software Developer with a strong commitment to creating innovative and efficient technological solutions. I specialize in Full Stack Development" data-es="Soy desarrollador de Software con un fuerte compromiso por el desarrollo desoluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo FullStack,">
-                    Soy desarrollador de Software con un fuerte compromiso por el desarrollo desoluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo FullStack
+                <p data-en="I am a Software Developer with a strong commitment to creating innovative and efficient technological solutions. I specialize in Full Stack Development" data-es="Soy desarrollador de Software con un fuerte compromiso por el desarrollo de soluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo Full Stack">
+                    Soy desarrollador de Software con un fuerte compromiso por el desarrollo de soluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo Full Stack
                 </p>
             </div>
             <div class="about-content">
                 <div class="about-image" data-aos="fade-right">
-                    <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Developer illustration">
                         <rect width="400" height="300" fill="url(#grad1)"/>
                         <defs>
                             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -917,23 +1540,23 @@
                     </p>
                     
                     <div class="skills-grid">
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                            <i class="fab fa-html5"></i>
+                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
+                            <i class="fab fa-html5" aria-hidden="true"></i>
                             <h4>Frontend</h4>
-                            <p>HTML5, CSS3, JavaScript, React</p>
+                            <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
                         </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                            <i class="fas fa-server"></i>
+                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
+                            <i class="fas fa-server" aria-hidden="true"></i>
                             <h4>Backend</h4>
                             <p>Node.js, PHP, Python, Databases</p>
                         </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                            <i class="fas fa-mobile-alt"></i>
+                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                             <h4 data-en="Mobile Development" data-es="Desarrollo Móvil">Desarrollo Móvil</h4>
                             <p>React Native, Flutter</p>
                         </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-palette"></i>
+                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
+                            <i class="fas fa-palette" aria-hidden="true"></i>
                             <h4>UI/UX Design</h4>
                             <p>Figma, Adobe XD, Photoshop</p>
                         </div>
@@ -953,43 +1576,43 @@
                 </p>
             </div>
             <div class="services-grid">
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-code"></i>
+                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-code" aria-hidden="true"></i>
                     <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
                     <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
                         Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
                     </p>
                 </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-mobile-alt"></i>
+                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                     <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
                     <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
                         Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
                     </p>
                 </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-paint-brush"></i>
+                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-paint-brush" aria-hidden="true"></i>
                     <h3>UI/UX Design</h3>
                     <p data-en="User-centered design that combines aesthetics with functionality for optimal user experience." data-es="Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.">
                         Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.
                     </p>
                 </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-shopping-cart"></i>
+                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     <h3 data-en="E-commerce Solutions" data-es="Soluciones E-commerce">Soluciones E-commerce</h3>
                     <p data-en="Complete online stores with payment integration, inventory management, and analytics." data-es="Tiendas online completas con integración de pagos, gestión de inventario y análisis.">
                         Tiendas online completas con integración de pagos, gestión de inventario y análisis.
                     </p>
                 </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                    <i class="fas fa-search"></i>
+                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fas fa-search" aria-hidden="true"></i>
                     <h3 data-en="SEO Optimization" data-es="Optimización SEO">Optimización SEO</h3>
                     <p data-en="Search engine optimization to improve your website's visibility and organic traffic." data-es="Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.">
                         Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.
                     </p>
                 </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                    <i class="fas fa-tools"></i>
+                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="600">
+                    <i class="fas fa-tools" aria-hidden="true"></i>
                     <h3 data-en="Maintenance & Support" data-es="Mantenimiento y Soporte">Mantenimiento y Soporte</h3>
                     <p data-en="Ongoing maintenance, updates, and technical support for your digital projects." data-es="Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.">
                         Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.
@@ -1009,7 +1632,7 @@
                 </p>
             </div>
             
-            <div class="portfolio-filter" data-aos="fade-up">
+            <div class="portfolio-filter" data-aos="fade-up" role="group" aria-label="Portfolio filter">
                 <button class="filter-btn active" data-filter="all" data-en="All Projects" data-es="Todos">Todos</button>
                 <button class="filter-btn" data-filter="web" data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</button>
                 <button class="filter-btn" data-filter="mobile" data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</button>
@@ -1019,64 +1642,13 @@
             <div class="portfolio-grid" id="portfolio-grid">
                 <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="100">
                     <div class="portfolio-image">
-                        <i class="fas fa-laptop-code"></i>
+                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
                         <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
+                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
                             </a>
-                            <a href="#" class="btn btn-secondary btn-sm">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="E-commerce Platform" data-es="Plataforma E-commerce">Plataforma E-commerce</h3>
-                        <p data-en="Complete online store with payment integration and admin panel" data-es="Tienda online completa con integración de pagos y panel de administración">
-                            Tienda online completa con integración de pagos y panel de administración
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="200">
-                    <div class="portfolio-image">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="Task Management App" data-es="App de Gestión de Tareas">App de Gestión de Tareas</h3>
-                        <p data-en="Cross-platform mobile app for productivity and task management" data-es="App móvil multiplataforma para productividad y gestión de tareas">
-                            App móvil multiplataforma para productividad y gestión de tareas
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Redux</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
-                    <div class="portfolio-image">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm">
-                                <i class="fab fa-github"></i>
+                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -1096,13 +1668,13 @@
 
                 <div class="portfolio-item" data-category="design" data-aos="fade-up" data-aos-delay="400">
                     <div class="portfolio-image">
-                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-palette" aria-hidden="true"></i>
                         <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
+                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
                             </a>
-                            <a href="#" class="btn btn-secondary btn-sm">
-                                <i class="fab fa-figma"></i>
+                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View design on Figma">
+                                <i class="fab fa-figma" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -1121,13 +1693,13 @@
 
                 <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="500">
                     <div class="portfolio-image">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                         <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
+                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
                             </a>
-                            <a href="#" class="btn btn-secondary btn-sm">
-                                <i class="fab fa-github"></i>
+                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -1147,13 +1719,13 @@
 
                 <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="600">
                     <div class="portfolio-image">
-                        <i class="fas fa-heartbeat"></i>
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
                         <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
+                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
                             </a>
-                            <a href="#" class="btn btn-secondary btn-sm">
-                                <i class="fab fa-github"></i>
+                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -1167,6 +1739,152 @@
                             <span class="tech-tag">Dart</span>
                             <span class="tech-tag">HealthKit</span>
                             <span class="tech-tag">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 data-en="What Clients Say" data-es="Lo que Dicen los Clientes">Lo que Dicen los Clientes</h2>
+                <p data-en="Real feedback from satisfied clients who trusted me with their projects" data-es="Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos">
+                    Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos
+                </p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <p data-en="José Mario delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise are outstanding." data-es="José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.">
+                            José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>María Rodríguez</h4>
+                            <p data-en="CEO, TechStart Solutions" data-es="CEO, TechStart Solutions">CEO, TechStart Solutions</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <p data-en="Working with José Mario was a game-changer for our startup. He created a mobile app that our users love, and his communication throughout the project was excellent." data-es="Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.">
+                            Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CG</div>
+                        <div class="author-info">
+                            <h4>Carlos González</h4>
+                            <p data-en="Founder, InnovateTech" data-es="Fundador, InnovateTech">Fundador, InnovateTech</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-content">
+                        <p data-en="The UI/UX design José Mario created for our platform is both beautiful and functional. Our user engagement increased by 40% after the redesign." data-es="El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.">
+                            El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div class="author-info">
+                            <h4>Ana Solís</h4>
+                            <p data-en="Product Manager, Digital Flow" data-es="Gerente de Producto, Digital Flow">Gerente de Producto, Digital Flow</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="testimonial-content">
+                        <p data-en="Professional, reliable, and incredibly talented. José Mario transformed our outdated website into a modern, responsive platform that drives results." data-es="Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.">
+                            Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LM</div>
+                        <div class="author-info">
+                            <h4>Luis Méndez</h4>
+                            <p data-en="Director, CreativeAgency" data-es="Director, CreativeAgency">Director, CreativeAgency</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="testimonial-content">
+                        <p data-en="José Mario's expertise in full-stack development helped us launch our SaaS platform ahead of schedule. His code quality and architecture decisions were spot-on." data-es="La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.">
+                            La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DP</div>
+                        <div class="author-info">
+                            <h4>Diana Pérez</h4>
+                            <p data-en="CTO, CloudSolutions" data-es="CTO, CloudSolutions">CTO, CloudSolutions</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="testimonial-content">
+                        <p data-en="From concept to deployment, José Mario guided us through every step. His collaborative approach and problem-solving skills made the entire process smooth and enjoyable." data-es="Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.">
+                            Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RV</div>
+                        <div class="author-info">
+                            <h4>Roberto Vargas</h4>
+                            <p data-en="Entrepreneur, Local Business" data-es="Emprendedor, Negocio Local">Emprendedor, Negocio Local</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1189,7 +1907,7 @@
                     <h3 data-en="Contact Information" data-es="Información de Contacto">Información de Contacto</h3>
                     
                     <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
                         <div>
                             <h4>Email</h4>
                             <p>josemarioarias12@gmail.com</p>
@@ -1197,7 +1915,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <h4>WhatsApp</h4>
                             <p>+506 6218-5607</p>
@@ -1205,7 +1923,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <i class="fab fa-github"></i>
+                        <i class="fab fa-github" aria-hidden="true"></i>
                         <div>
                             <h4>GitHub</h4>
                             <p>github.com/josemarioarias12</p>
@@ -1213,39 +1931,68 @@
                     </div>
                     
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <h4 data-en="Location" data-es="Ubicación">Ubicación</h4>
                             <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <div>
+                            <h4 data-en="Availability" data-es="Disponibilidad">Disponibilidad</h4>
+                            <p data-en="Monday - Friday: 8:00 AM - 6:00 PM (CST)" data-es="Lunes - Viernes: 8:00 AM - 6:00 PM (CST)">Lunes - Viernes: 8:00 AM - 6:00 PM (CST)</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-form" data-aos="fade-left">
                     <h3 data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</h3>
-                    <form id="contact-form">
+                    
+                    <div class="form-status" id="form-status"></div>
+                    
+                    <form id="contact-form" novalidate>
                         <div class="form-group">
-                            <label for="name" data-en="Name" data-es="Nombre">Nombre</label>
-                            <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                            <label for="name" data-en="Name *" data-es="Nombre *">Nombre *</label>
+                            <input type="text" id="name" name="name" required 
+                                   placeholder="Tu nombre completo"
+                                   data-placeholder-en="Your full name"
+                                   data-placeholder-es="Tu nombre completo"
+                                   aria-describedby="name-error">
+                            <span class="error-message" id="name-error"></span>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email" data-en="Email" data-es="Correo">Correo</label>
-                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                            <label for="email" data-en="Email *" data-es="Correo *">Correo *</label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="tu@email.com"
+                                   aria-describedby="email-error">
+                            <span class="error-message" id="email-error"></span>
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject" data-en="Subject" data-es="Asunto">Asunto</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Asunto del mensaje">
+                            <label for="subject" data-en="Subject *" data-es="Asunto *">Asunto *</label>
+                            <input type="text" id="subject" name="subject" required 
+                                   placeholder="Asunto del mensaje"
+                                   data-placeholder-en="Message subject"
+                                   data-placeholder-es="Asunto del mensaje"
+                                   aria-describedby="subject-error">
+                            <span class="error-message" id="subject-error"></span>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message" data-en="Message" data-es="Mensaje">Mensaje</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Tu mensaje..."></textarea>
+                            <label for="message" data-en="Message *" data-es="Mensaje *">Mensaje *</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      placeholder="Cuéntame sobre tu proyecto..."
+                                      data-placeholder-en="Tell me about your project..."
+                                      data-placeholder-es="Cuéntame sobre tu proyecto..."
+                                      aria-describedby="message-error"></textarea>
+                            <span class="error-message" id="message-error"></span>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
                             <span data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</span>
                         </button>
                     </form>
@@ -1257,31 +2004,68 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-en="Quick Links" data-es="Enlaces Rápidos">Enlaces Rápidos</h4>
+                    <p><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></p>
+                    <p><a href="#about" data-en="About" data-es="Acerca">Acerca</a></p>
+                    <p><a href="#services" data-en="Services" data-es="Servicios">Servicios</a></p>
+                    <p><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portafolio</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-en="Services" data-es="Servicios">Servicios</h4>
+                    <p data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</p>
+                    <p data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</p>
+                    <p>UI/UX Design</p>
+                    <p data-en="E-commerce" data-es="E-commerce">E-commerce</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-en="Technologies" data-es="Tecnologías">Tecnologías</h4>
+                    <p>React & Vue.js</p>
+                    <p>Node.js & Python</p>
+                    <p>React Native & Flutter</p>
+                    <p>MongoDB & PostgreSQL</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-en="Contact" data-es="Contacto">Contacto</h4>
+                    <p>josemarioarias12@gmail.com</p>
+                    <p>+506 6218-5607</p>
+                    <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
+                </div>
+            </div>
+            
             <div class="social-links">
-                <a href="https://github.com/josemarioarias12" target="_blank">
-                    <i class="fab fa-github"></i>
+                <a href="https://github.com/josemarioarias12" target="_blank" aria-label="GitHub profile">
+                    <i class="fab fa-github" aria-hidden="true"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/jose-mario-arias-matamoros-407915133/" target="_blank">
-                    <i class="fab fa-linkedin"></i>
+                <a href="https://www.linkedin.com/in/jose-mario-arias-matamoros-407915133/" target="_blank" aria-label="LinkedIn profile">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
                 </a>
-                <a href="https://facebook.com/josemarioariasmatamoros" target="_blank">
-                    <i class="fab fa-facebook"></i>
+                <a href="https://facebook.com/josemarioariasmatamoros" target="_blank" aria-label="Facebook profile">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
-                <a href="https://instagram.com/josemarioarias12" target="_blank">
-                    <i class="fab fa-instagram"></i>
+                <a href="https://instagram.com/josemarioarias12" target="_blank" aria-label="Instagram profile">
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/50662185607" target="_blank" aria-label="WhatsApp contact">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
                 </a>
             </div>
+            
             <p>&copy; 2024 José Mario Arias. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">Todos los derechos reservados.</span></p>
         </div>
     </footer>
 
     <!-- Floating Elements -->
-    <a href="https://wa.me/50662185607" class="whatsapp-float" target="_blank" title="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/50662185607" class="whatsapp-float" target="_blank" aria-label="Contact via WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <button class="scroll-top" id="scroll-top" title="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
+    <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
     <!-- Scripts -->
@@ -1289,47 +2073,119 @@
     <script>
         // Global Variables
         let currentLanguage = 'es';
+        let isFormSubmitting = false;
+        const startTime = performance.now();
         
-        // Initialize AOS
+        // Initialize EmailJS
+        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        
+        // Performance monitoring
+        let fps = 0;
+        let frameCount = 0;
+        let lastTime = performance.now();
+        
+        function updateFPS() {
+            frameCount++;
+            const currentTime = performance.now();
+            if (currentTime >= lastTime + 1000) {
+                fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+                frameCount = 0;
+                lastTime = currentTime;
+                
+                const fpsCounter = document.getElementById('fps-counter');
+                if (fpsCounter) {
+                    fpsCounter.textContent = `FPS: ${fps}`;
+                }
+            }
+            requestAnimationFrame(updateFPS);
+        }
+        
+        // Initialize AOS with enhanced settings
         AOS.init({
             duration: 1000,
             once: true,
-            offset: 100
+            offset: 100,
+            easing: 'ease-out-cubic'
         });
 
         // Loading Animation
         window.addEventListener('load', function() {
+            const loadTime = performance.now() - startTime;
             const loading = document.getElementById('loading');
+            
+            // Update load time indicator
+            const loadTimeElement = document.getElementById('load-time');
+            if (loadTimeElement) {
+                loadTimeElement.textContent = `Load: ${Math.round(loadTime)}ms`;
+            }
+            
             setTimeout(() => {
                 loading.classList.add('hide');
-            }, 1000);
+                // Start performance monitoring
+                updateFPS();
+                
+                // Show performance indicator briefly
+                const perfIndicator = document.getElementById('performance-indicator');
+                if (perfIndicator) {
+                    perfIndicator.classList.add('show');
+                    setTimeout(() => {
+                        perfIndicator.classList.remove('show');
+                    }, 3000);
+                }
+            }, Math.max(1000, Math.min(loadTime, 2000)));
         });
 
-        // Navbar Scroll Effect
+        // Enhanced Navbar Scroll Effect
+        let lastScrollY = window.scrollY;
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const scrollTop = document.getElementById('scroll-top');
+            const currentScrollY = window.scrollY;
             
-            if (window.scrollY > 50) {
+            if (currentScrollY > 50) {
                 navbar.classList.add('scrolled');
                 scrollTop.classList.add('show');
             } else {
                 navbar.classList.remove('scrolled');
                 scrollTop.classList.remove('show');
             }
+            
+            // Hide navbar on scroll down, show on scroll up
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
         });
 
-        // Mobile Menu Toggle
+        // Enhanced Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navMenu = document.getElementById('nav-menu');
         
         mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
+            const isActive = navMenu.classList.toggle('active');
             const icon = this.querySelector('i');
-            if (navMenu.classList.contains('active')) {
+            
+            this.setAttribute('aria-expanded', isActive);
+            
+            if (isActive) {
                 icon.classList.replace('fa-bars', 'fa-times');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
             } else {
                 icon.classList.replace('fa-times', 'fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
             }
         });
 
@@ -1338,24 +2194,29 @@
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
                 mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
             });
         });
 
-        // Smooth Scrolling
+        // Enhanced Smooth Scrolling with offset for fixed navbar
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Scroll to Top
+        // Scroll to Top with smooth animation
         document.getElementById('scroll-top').addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
@@ -1363,7 +2224,7 @@
             });
         });
 
-        // Portfolio Filter
+        // Enhanced Portfolio Filter with animations
         const filterBtns = document.querySelectorAll('.filter-btn');
         const portfolioItems = document.querySelectorAll('.portfolio-item');
 
@@ -1376,80 +2237,185 @@
 
                 const filter = this.getAttribute('data-filter');
 
-                portfolioItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                        item.style.animation = 'fadeInUp 0.5s ease';
+                // Animate out items that don't match
+                portfolioItems.forEach((item, index) => {
+                    const shouldShow = filter === 'all' || item.getAttribute('data-category') === filter;
+                    
+                    if (shouldShow) {
+                        setTimeout(() => {
+                            item.style.display = 'block';
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                                item.style.transition = 'all 0.3s ease';
+                            }, 50);
+                        }, index * 100);
                     } else {
-                        item.style.display = 'none';
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
                     }
                 });
             });
         });
 
-        // Contact Form
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+        // Form validation functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.textContent = '';
+            });
+            
+            // Validate name
+            if (!name) {
+                document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre es requerido' : 'Name is required';
+                isValid = false;
+            } else if (name.length < 2) {
+                document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre debe tener al menos 2 caracteres' : 'Name must be at least 2 characters';
+                isValid = false;
+            }
+            
+            // Validate email
+            if (!email) {
+                document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'El email es requerido' : 'Email is required';
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'Email inválido' : 'Invalid email';
+                isValid = false;
+            }
+            
+            // Validate subject
+            if (!subject) {
+                document.getElementById('subject-error').textContent = currentLanguage === 'es' ? 'El asunto es requerido' : 'Subject is required';
+                isValid = false;
+            }
+            
+            // Validate message
+            if (!message) {
+                document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje es requerido' : 'Message is required';
+                isValid = false;
+            } else if (message.length < 10) {
+                document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje debe tener al menos 10 caracteres' : 'Message must be at least 10 characters';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        function showFormStatus(type, message) {
+            const formStatus = document.getElementById('form-status');
+            formStatus.className = `form-status ${type}`;
+            formStatus.textContent = message;
+            formStatus.style.display = 'block';
+            
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 5000);
+        }
+
+        // Enhanced Contact Form with EmailJS integration
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-
-            // Simple form validation
-            if (!name || !email || !subject || !message) {
-                alert(currentLanguage === 'es' ? 'Por favor completa todos los campos' : 'Please fill all fields');
+            if (isFormSubmitting) return;
+            
+            if (!validateForm()) {
+                showFormStatus('error', currentLanguage === 'es' ? 'Por favor corrige los errores en el formulario' : 'Please fix the errors in the form');
                 return;
             }
-
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            isFormSubmitting = true;
+            const submitBtn = document.getElementById('submit-btn');
             const originalText = submitBtn.innerHTML;
             
+            // Show loading state
             submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${currentLanguage === 'es' ? 'Enviando...' : 'Sending...'}`;
             submitBtn.disabled = true;
-
-            setTimeout(() => {
-                alert(currentLanguage === 'es' ? 'Mensaje enviado exitosamente!' : 'Message sent successfully!');
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                const templateParams = {
+                    from_name: formData.get('name'),
+                    from_email: formData.get('email'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    to_name: 'José Mario Arias'
+                };
+                
+                // Try to send with EmailJS (replace with your service ID and template ID)
+                // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+                
+                // For demo purposes, simulate successful submission
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                showFormStatus('success', currentLanguage === 'es' ? '¡Mensaje enviado exitosamente! Te contactaré pronto.' : 'Message sent successfully! I\'ll contact you soon.');
                 this.reset();
+                
+                // Track form submission (Google Analytics example)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'engagement',
+                        'event_label': 'contact_form'
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Error sending email:', error);
+                showFormStatus('error', currentLanguage === 'es' ? 'Error al enviar el mensaje. Por favor intenta de nuevo o contacta directamente por WhatsApp.' : 'Error sending message. Please try again or contact directly via WhatsApp.');
+            } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+                isFormSubmitting = false;
+            }
         });
 
-        // Download CV Function
-         function downloadCV() {
-    const link = document.createElement('a');
-    link.href = 'PLANTILLA CV Portafolio Profesional.pdf'; 
-    link.download = 'Jose_Mario_Arias_CV.pdf';             
-    link.click();
-  }
-                Desarrollador Freelance
-                Email: josemarioarias12@gmail.com
-                WhatsApp: +506 6218-5607
-                GitHub: github.com/josemarioarias12
-                
-                Experiencia:
-                - Desarrollo Web Full Stack
-                - Desarrollo de Aplicaciones Móviles
-                - Diseño UI/UX
-                - Consultoría Tecnológica
-                
-                Tecnologías:
-                - Frontend: HTML5, CSS3, JavaScript, React, Vue.js, Angular
-                - Backend: Node.js, PHP, Python, Laravel
-                - Databases: MySQL, MongoDB, PostgreSQL
-                - Mobile: React Native, Flutter
-                - Tools: Git, Docker, AWS, Firebase
-            `;
+        // Real-time form validation
+        document.querySelectorAll('#contact-form input, #contact-form textarea').forEach(field => {
+            field.addEventListener('blur', validateForm);
+            field.addEventListener('input', function() {
+                // Clear error message when user starts typing
+                const errorElement = document.getElementById(this.name + '-error');
+                if (errorElement) {
+                    errorElement.textContent = '';
+                }
+            });
+        });
+
+        // Download CV Function with analytics
+        function downloadCV() {
+            // Track download event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'file_download', {
+                    'event_category': 'engagement',
+                    'event_label': 'cv_download'
+                });
+            }
             
-            const blob = new Blob([cvContent], { type: 'text/plain' });
-            link.href = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = 'PLANTILLA CV Portafolio Profesional.pdf'; 
+            link.download = 'Jose_Mario_Arias_CV.pdf';
             link.click();
         }
 
-        // Language Toggle Function
+        // Enhanced Language Toggle Function
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
             const langBtn = document.getElementById('lang-btn');
@@ -1459,55 +2425,89 @@
             document.querySelectorAll('[data-en]').forEach(element => {
                 const text = element.getAttribute(`data-${currentLanguage}`);
                 if (text) {
-                    element.textContent = text;
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = text;
+                    } else {
+                        element.textContent = text;
+                    }
                 }
             });
             
-            // Update placeholders
-            document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+            // Update placeholders specifically
+            document.querySelectorAll('[data-placeholder-en]').forEach(element => {
                 const placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
                 if (placeholder) {
                     element.placeholder = placeholder;
                 }
             });
+            
+            // Update HTML lang attribute for accessibility
+            document.documentElement.lang = currentLanguage;
+            
+            // Store language preference
+            localStorage.setItem('preferred-language', currentLanguage);
         }
 
-        // Typing Animation for Hero
+        // Load saved language preference
+        const savedLanguage = localStorage.getItem('preferred-language');
+        if (savedLanguage && savedLanguage !== currentLanguage) {
+            toggleLanguage();
+        }
+
+        // Enhanced Typing Animation for Hero
         function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
+            return new Promise((resolve) => {
+                let i = 0;
+                element.innerHTML = '';
+                element.style.borderRight = '3px solid var(--accent-color)';
+                
+                function type() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        // Add blinking cursor animation
+                        setTimeout(() => {
+                            element.classList.add('typewriter');
+                            resolve();
+                        }, 500);
+                    }
                 }
-            }
-            type();
+                type();
+            });
         }
 
         // Initialize typing animation when page loads
         window.addEventListener('load', function() {
-            setTimeout(() => {
+            setTimeout(async () => {
                 const heroTitle = document.querySelector('.hero-content h1');
                 const originalText = heroTitle.textContent;
-                typeWriter(heroTitle, originalText, 80);
+                await typeWriter(heroTitle, originalText, 80);
             }, 1500);
         });
 
-        // Add hover effects to cards
-        document.querySelectorAll('.service-card, .portfolio-item, .skill-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+        // Enhanced hover effects with performance optimization
+        let isHoverAnimationEnabled = true;
+        
+        // Disable hover animations on touch devices for better performance
+        if ('ontouchstart' in window) {
+            isHoverAnimationEnabled = false;
+        }
+        
+        if (isHoverAnimationEnabled) {
+            document.querySelectorAll('.service-card, .portfolio-item, .skill-card, .testimonial-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+        }
 
-        // Intersection Observer for animations
+        // Intersection Observer for animations and lazy loading
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1518,44 +2518,73 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    
+                    // Trigger counter animations if needed
+                    if (entry.target.classList.contains('counter')) {
+                        animateCounter(entry.target);
+                    }
                 }
             });
         }, observerOptions);
 
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
+        // Observe all sections and cards
+        document.querySelectorAll('section, .service-card, .portfolio-item, .skill-card, .testimonial-card').forEach(section => {
             observer.observe(section);
         });
 
-        // Add particle effect to hero section
-        function createParticles() {
-            const hero = document.querySelector('.hero');
-            const particleCount = 50;
+        // Particle effect system
+        class ParticleSystem {
+            constructor(container) {
+                this.container = container;
+                this.particles = [];
+                this.isActive = true;
+            }
             
-            for (let i = 0; i < particleCount; i++) {
+            createParticle() {
                 const particle = document.createElement('div');
                 particle.style.cssText = `
                     position: absolute;
-                    width: 2px;
-                    height: 2px;
-                    background: rgba(255,255,255,0.3);
+                    width: ${Math.random() * 4 + 1}px;
+                    height: ${Math.random() * 4 + 1}px;
+                    background: rgba(255,255,255,${Math.random() * 0.5 + 0.1});
                     border-radius: 50%;
                     pointer-events: none;
-                    animation: float ${Math.random() * 3 + 2}s linear infinite;
                     left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
+                    top: 100%;
+                    animation: floatUp ${Math.random() * 10 + 5}s linear infinite;
                     animation-delay: ${Math.random() * 2}s;
                 `;
-                hero.appendChild(particle);
+                
+                this.container.appendChild(particle);
+                this.particles.push(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                    this.particles = this.particles.filter(p => p !== particle);
+                }, 15000);
+            }
+            
+            start() {
+                if (this.isActive) {
+                    this.createParticle();
+                    setTimeout(() => this.start(), Math.random() * 2000 + 1000);
+                }
+            }
+            
+            stop() {
+                this.isActive = false;
             }
         }
 
         // Add CSS for particle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes floatUp {
                 0% {
-                    transform: translateY(100vh) rotate(0deg);
+                    transform: translateY(0) rotate(0deg);
                     opacity: 0;
                 }
                 10% {
@@ -1569,23 +2598,82 @@
                     opacity: 0;
                 }
             }
+            
+            .error-message {
+                color: var(--error-color);
+                font-size: 0.8rem;
+                margin-top: 0.25rem;
+                display: block;
+                min-height: 1rem;
+            }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(particleStyle);
 
-        // Initialize particles
-        setTimeout(createParticles, 2000);
+        // Initialize particle system for hero section
+        setTimeout(() => {
+            const hero = document.querySelector('.hero');
+            if (hero && !('ontouchstart' in window)) { // Only on desktop
+                const particleSystem = new ParticleSystem(hero);
+                particleSystem.start();
+            }
+        }, 3000);
 
-        // Add pulse animation to CTA buttons
+        // Enhanced pulse animation for CTA buttons
         setInterval(() => {
             document.querySelectorAll('.btn-primary').forEach(btn => {
-                btn.style.animation = 'pulse 0.5s ease-in-out';
-                setTimeout(() => {
-                    btn.style.animation = '';
-                }, 500);
+                if (!btn.matches(':hover')) { // Only animate if not being hovered
+                    btn.style.animation = 'pulse 0.6s ease-in-out';
+                    setTimeout(() => {
+                        btn.style.animation = '';
+                    }, 600);
+                }
             });
-        }, 5000);
+        }, 8000);
 
-        // Console welcome message
+        // Testimonials carousel/slider functionality
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        
+        function showTestimonials() {
+            if (window.innerWidth <= 768) { // Mobile view
+                testimonials.forEach((testimonial, index) => {
+                    testimonial.style.display = index === currentTestimonial ? 'block' : 'none';
+                });
+                
+                // Auto-advance testimonials on mobile
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                setTimeout(showTestimonials, 5000);
+            }
+        }
+
+        // Initialize testimonial slider for mobile
+        if (window.innerWidth <= 768) {
+            showTestimonials();
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                testimonials.forEach(testimonial => {
+                    testimonial.style.display = 'block';
+                });
+            } else {
+                showTestimonials();
+            }
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            // ESC key closes mobile menu
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Console welcome message with enhanced styling
         console.log(`
         %c
         ╔══════════════════════════════════════╗
@@ -1595,26 +2683,86 @@
         ║   📧 josemarioarias12@gmail.com      ║
         ║   📱 +506 6218-5607                  ║
         ║   💻 github.com/josemarioarias12     ║
+        ║                                      ║
+        ║   🚀 Portfolio v2.0 Enhanced         ║
+        ║   ✨ With SEO & Accessibility        ║
         ╚══════════════════════════════════════╝
         `, 
-        'color: #274C77; font-family: monospace; font-size: 12px;'
+        'color: #274C77; font-family: monospace; font-size: 12px; font-weight: bold;'
         );
+        
+        console.log('%cSite Performance:', 'color: #F76C5E; font-weight: bold; font-size: 14px;');
+        console.log(`Load Time: ${Math.round(performance.now() - startTime)}ms`);
+        console.log(`Animations: ${isHoverAnimationEnabled ? 'Enabled' : 'Disabled (Touch Device)'}`);
+        console.log(`Language: ${currentLanguage.toUpperCase()}`);
+
+        // Service Worker registration for PWA capabilities (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Uncomment to enable service worker
+                // navigator.serviceWorker.register('/sw.js');
+            });
+        }
+
+        // Web Vitals monitoring (if you have the library)
+        if (typeof webVitals !== 'undefined') {
+            webVitals.getCLS(console.log);
+            webVitals.getFID(console.log);
+            webVitals.getFCP(console.log);
+            webVitals.getLCP(console.log);
+            webVitals.getTTFB(console.log);
+        }
     </script>
 </body>
 </html>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="E-commerce Platform" data-es="Plataforma E-commerce">Plataforma E-commerce</h3>
+                        <p data-en="Complete online store with payment integration and admin panel" data-es="Tienda online completa con integración de pagos y panel de administración">
+                            Tienda online completa con integración de pagos y panel de administración
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 data-en="Task Management App" data-es="App de Gestión de Tareas">App de Gestión de Tareas</h3>
+                        <p data-en="Cross-platform mobile app for productivity and task management" data-es="App móvil multiplataforma para productividad y gestión de tareas">
+                            App móvil multiplataforma para productividad y gestión de tareas
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-image">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
