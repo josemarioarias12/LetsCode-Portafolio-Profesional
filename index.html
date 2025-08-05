@@ -82,6 +82,7 @@
             --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
             --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, #ff6b9d 100%);
+            --navbar-height: 80px;
         }
 
         * {
@@ -90,11 +91,29 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main content wrapper to ensure footer stays at bottom */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
         }
 
         /* Accessibility improvements */
@@ -196,22 +215,28 @@
             left: 100%;
         }
 
-        /* Header & Navigation */
+        /* Header & Navigation - FIXED HEADER */
         .navbar {
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
+            height: var(--navbar-height);
             background: rgba(39, 76, 119, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1.2rem 0;
+            display: flex;
+            align-items: center;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
         .navbar.scrolled {
             background: rgba(39, 76, 119, 0.98);
             box-shadow: var(--shadow);
-            padding: 0.8rem 0;
+            height: 70px;
         }
 
         .nav-container {
@@ -221,6 +246,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            width: 100%;
+            height: 100%;
         }
 
         .logo {
@@ -239,10 +266,14 @@
         }
 
         .logo-img {
-            height: 100px;
+            height: 50px;
             width: auto;
             border-radius: 8px;
             transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .logo-img {
+            height: 40px;
         }
 
         .logo-text {
@@ -262,6 +293,8 @@
             list-style: none;
             gap: 2rem;
             align-items: center;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-menu a {
@@ -270,6 +303,7 @@
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem 0;
         }
 
         .nav-menu a:hover {
@@ -316,13 +350,14 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: transform 0.3s ease;
+            padding: 0.5rem;
         }
 
         .mobile-menu-btn:hover {
             transform: scale(1.1);
         }
 
-        /* Hero Section */
+        /* Hero Section - Adjusted for fixed header */
         .hero {
             min-height: 100vh;
             background: var(--gradient);
@@ -330,6 +365,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding-top: var(--navbar-height);
         }
 
         .hero::before {
@@ -476,10 +512,11 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        /* Sections */
+        /* Sections - Adjusted padding for fixed header */
         section {
             padding: 5rem 0;
             position: relative;
+            scroll-margin-top: var(--navbar-height);
         }
 
         .container {
@@ -1027,13 +1064,22 @@
             color: var(--error-color);
         }
 
-        /* Footer */
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: block;
+            min-height: 1rem;
+        }
+
+        /* Footer - FIXED TO STAY AT BOTTOM */
         .footer {
             background: var(--text-dark);
             color: var(--text-light);
             text-align: center;
             padding: 3rem 0 2rem;
             position: relative;
+            margin-top: auto; /* This pushes footer to bottom */
         }
 
         .footer::before {
@@ -1247,13 +1293,17 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            :root {
+                --navbar-height: 70px;
+            }
+
             .mobile-menu-btn {
                 display: block;
             }
 
             .nav-menu {
                 position: fixed;
-                top: 100%;
+                top: var(--navbar-height);
                 left: 0;
                 width: 100%;
                 background: var(--primary-color);
@@ -1262,10 +1312,16 @@
                 transform: translateX(-100%);
                 transition: all 0.3s ease;
                 box-shadow: var(--shadow);
+                height: calc(100vh - var(--navbar-height));
+                overflow-y: auto;
             }
 
             .nav-menu.active {
                 transform: translateX(0);
+            }
+
+            .hero {
+                padding-top: var(--navbar-height);
             }
 
             .hero-container {
@@ -1304,7 +1360,11 @@
             }
 
             .logo-img {
-                height: 50px;
+                height: 40px;
+            }
+
+            .navbar.scrolled .logo-img {
+                height: 35px;
             }
 
             .logo-text {
@@ -1317,6 +1377,10 @@
         }
 
         @media (max-width: 480px) {
+            :root {
+                --navbar-height: 60px;
+            }
+
             .nav-container {
                 padding: 0 1rem;
             }
@@ -1343,7 +1407,11 @@
             }
 
             .logo-img {
-                height: 40px;
+                height: 35px;
+            }
+
+            .navbar.scrolled .logo-img {
+                height: 30px;
             }
 
             .logo-text {
@@ -1438,626 +1506,681 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-        <div class="loading-text" data-en="Loading..." data-es="Cargando...">Cargando...</div>
-    </div>
-
-    <!-- Performance Indicator -->
-    <div class="performance-indicator" id="performance-indicator">
-        <div id="fps-counter">FPS: 60</div>
-        <div id="load-time">Load: 0ms</div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="#home" class="logo" aria-label="José Mario Arias - Home">
-                <img src="./letscodelogo.png" alt="LetsCode Logo" class="logo-img">
-                <span class="logo-text">LetsCode</span>
-            </a>
-            <ul class="nav-menu" id="nav-menu" role="menubar">
-                <li role="none"><a href="#home" role="menuitem" data-en="Home" data-es="Inicio">Inicio</a></li>
-                <li role="none"><a href="#about" role="menuitem" data-en="About" data-es="Acerca">Acerca</a></li>
-                <li role="none"><a href="#services" role="menuitem" data-en="Services" data-es="Servicios">Servicios</a></li>
-                <li role="none"><a href="#portfolio" role="menuitem" data-en="Portfolio" data-es="Portafolio">Portafolio</a></li>
-                <li role="none"><a href="#testimonials" role="menuitem" data-en="Testimonials" data-es="Testimonios">Testimonios</a></li>
-                <li role="none"><a href="#contact" role="menuitem" data-en="Contact" data-es="Contacto">Contacto</a></li>
-                <li role="none">
-                    <button class="language-switch" onclick="toggleLanguage()" id="lang-btn" aria-label="Switch language">
-                        EN
-                    </button>
-                </li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
+    <div class="main-wrapper">
+        <!-- Loading Screen -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text" data-en="Loading..." data-es="Cargando...">Cargando...</div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home" role="banner">
-        <div class="hero-container">
-            <div class="hero-content" data-aos="fade-right">
-                <h1 class="typewriter" data-en="Freelance Developer" data-es="Desarrollador Freelance">Desarrollador Freelance</h1>
-                <p class="subtitle" data-en="Full Stack Developer & UI/UX Designer" data-es="Desarrollador Full Stack & Diseñador UI/UX">Desarrollador Full Stack & Diseñador UI/UX</p>
-                <p data-en="Creating innovative digital solutions with modern technologies. Specialized in web development, mobile apps, and user experience design." data-es="Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.">
-                    Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#portfolio" class="btn btn-primary" aria-label="View my portfolio">
-                        <i class="fas fa-eye" aria-hidden="true"></i>
-                        <span data-en="View Portfolio" data-es="Ver Portafolio">Ver Portafolio</span>
-                    </a>
-                    <button class="btn btn-secondary" onclick="downloadCV()" aria-label="Download my CV">
-                        <i class="fas fa-download" aria-hidden="true"></i>
-                        <span data-en="Download CV" data-es="Descargar CV">Descargar CV</span>
-                    </button>
-                </div>
-            </div>
-            <div class="hero-image" data-aos="fade-left">
-                <div class="profile-card animate-float">
-                    <div class="profile-image">
-                        <i class="fas fa-user-tie" aria-hidden="true"></i>
-                    </div>
-                    <h3 data-en="José Mario Arias" data-es="José Mario Arias">José Mario Arias</h3>
-                    <p data-en="Passionate about creating digital solutions that make a difference in people's lives." data-es="Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.">
-                        Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.
-                    </p>
-                </div>
-            </div>
+        <!-- Performance Indicator -->
+        <div class="performance-indicator" id="performance-indicator">
+            <div id="fps-counter">FPS: 60</div>
+            <div id="load-time">Load: 0ms</div>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="About Me" data-es="Acerca de Mí">Acerca de Mí</h2>
-                <p data-en="I am a Software Developer with a strong commitment to creating innovative and efficient technological solutions. I specialize in Full Stack Development" data-es="Soy desarrollador de Software con un fuerte compromiso por el desarrollo de soluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo Full Stack">
-                    Soy desarrollador de Software con un fuerte compromiso por el desarrollo de soluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo Full Stack
-                </p>
-            </div>
-            <div class="about-content">
-                <div class="about-image" data-aos="fade-right">
-                    <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Developer illustration">
-                        <rect width="400" height="300" fill="url(#grad1)"/>
-                        <defs>
-                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#274C77;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#A3B4C4;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.2)"/>
-                        <text x="200" y="160" text-anchor="middle" fill="white" font-size="40" font-family="Arial">👨‍💻</text>
-                    </svg>
-                </div>
-                <div class="about-text" data-aos="fade-left">
-                    <h3 data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h3>
-                    <p data-en="I'm a freelance developer passionate about creating innovative digital solutions. With expertise in modern web technologies, I help businesses and individuals bring their ideas to life through clean, efficient, and user-friendly applications." data-es="Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.">
-                        Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.
-                    </p>
-                    
-                    <div class="skills-grid">
-                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
-                            <i class="fab fa-html5" aria-hidden="true"></i>
-                            <h4>Frontend</h4>
-                            <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
-                        </div>
-                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
-                            <i class="fas fa-server" aria-hidden="true"></i>
-                            <h4>Backend</h4>
-                            <p>Node.js, PHP, Python, Databases</p>
-                        </div>
-                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
-                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
-                            <h4 data-en="Mobile Development" data-es="Desarrollo Móvil">Desarrollo Móvil</h4>
-                            <p>React Native, Flutter</p>
-                        </div>
-                        <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-palette" aria-hidden="true"></i>
-                            <h4>UI/UX Design</h4>
-                            <p>Figma, Adobe XD, Photoshop</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="My Services" data-es="Mis Servicios">Mis Servicios</h2>
-                <p data-en="Professional services tailored to your needs" data-es="Servicios profesionales adaptados a tus necesidades">
-                    Servicios profesionales adaptados a tus necesidades
-                </p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-code" aria-hidden="true"></i>
-                    <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
-                    <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
-                        Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
-                    </p>
-                </div>
-                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-mobile-alt" aria-hidden="true"></i>
-                    <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
-                    <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
-                        Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
-                    </p>
-                </div>
-                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-paint-brush" aria-hidden="true"></i>
-                    <h3>UI/UX Design</h3>
-                    <p data-en="User-centered design that combines aesthetics with functionality for optimal user experience." data-es="Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.">
-                        Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.
-                    </p>
-                </div>
-                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                    <h3 data-en="E-commerce Solutions" data-es="Soluciones E-commerce">Soluciones E-commerce</h3>
-                    <p data-en="Complete online stores with payment integration, inventory management, and analytics." data-es="Tiendas online completas con integración de pagos, gestión de inventario y análisis.">
-                        Tiendas online completas con integración de pagos, gestión de inventario y análisis.
-                    </p>
-                </div>
-                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="500">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <h3 data-en="SEO Optimization" data-es="Optimización SEO">Optimización SEO</h3>
-                    <p data-en="Search engine optimization to improve your website's visibility and organic traffic." data-es="Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.">
-                        Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.
-                    </p>
-                </div>
-                <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="600">
-                    <i class="fas fa-tools" aria-hidden="true"></i>
-                    <h3 data-en="Maintenance & Support" data-es="Mantenimiento y Soporte">Mantenimiento y Soporte</h3>
-                    <p data-en="Ongoing maintenance, updates, and technical support for your digital projects." data-es="Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.">
-                        Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="My Portfolio" data-es="Mi Portafolio">Mi Portafolio</h2>
-                <p data-en="Featured projects that showcase my skills and creativity" data-es="Proyectos destacados que muestran mis habilidades y creatividad">
-                    Proyectos destacados que muestran mis habilidades y creatividad
-                </p>
-            </div>
-            
-            <div class="portfolio-filter" data-aos="fade-up" role="group" aria-label="Portfolio filter">
-                <button class="filter-btn active" data-filter="all" data-en="All Projects" data-es="Todos">Todos</button>
-                <button class="filter-btn" data-filter="web" data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</button>
-                <button class="filter-btn" data-filter="mobile" data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</button>
-                <button class="filter-btn" data-filter="design" data-en="UI/UX Design" data-es="Diseño UI/UX">Diseño UI/UX</button>
-            </div>
-
-            <div class="portfolio-grid" id="portfolio-grid">
-                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="100">
-                    <div class="portfolio-image">
-                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
-                                <i class="fas fa-eye" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="Analytics Dashboard" data-es="Dashboard de Análisis">Dashboard de Análisis</h3>
-                        <p data-en="Real-time data visualization dashboard with interactive charts" data-es="Dashboard de visualización de datos en tiempo real con gráficos interactivos">
-                            Dashboard de visualización de datos en tiempo real con gráficos interactivos
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">D3.js</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="design" data-aos="fade-up" data-aos-delay="400">
-                    <div class="portfolio-image">
-                        <i class="fas fa-palette" aria-hidden="true"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
-                                <i class="fas fa-eye" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View design on Figma">
-                                <i class="fab fa-figma" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="Restaurant App Design" data-es="Diseño App Restaurante">Diseño App Restaurante</h3>
-                        <p data-en="Complete UI/UX design for a restaurant ordering mobile application" data-es="Diseño UI/UX completo para una aplicación móvil de pedidos de restaurante">
-                            Diseño UI/UX completo para una aplicación móvil de pedidos de restaurante
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Figma</span>
-                            <span class="tech-tag">Photoshop</span>
-                            <span class="tech-tag">Illustrator</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="500">
-                    <div class="portfolio-image">
-                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
-                                <i class="fas fa-eye" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="Learning Management System" data-es="Sistema de Gestión de Aprendizaje">Sistema de Gestión de Aprendizaje</h3>
-                        <p data-en="Online education platform with course management and video streaming" data-es="Plataforma de educación online con gestión de cursos y streaming de video">
-                            Plataforma de educación online con gestión de cursos y streaming de video
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Angular</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">AWS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="600">
-                    <div class="portfolio-image">
-                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
-                                <i class="fas fa-eye" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="Health Tracking App" data-es="App de Seguimiento de Salud">App de Seguimiento de Salud</h3>
-                        <p data-en="Fitness and health monitoring app with wearable device integration" data-es="App de monitoreo de fitness y salud con integración de dispositivos wearables">
-                            App de monitoreo de fitness y salud con integración de dispositivos wearables
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">Dart</span>
-                            <span class="tech-tag">HealthKit</span>
-                            <span class="tech-tag">Firebase</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="What Clients Say" data-es="Lo que Dicen los Clientes">Lo que Dicen los Clientes</h2>
-                <p data-en="Real feedback from satisfied clients who trusted me with their projects" data-es="Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos">
-                    Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos
-                </p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="testimonial-content">
-                        <p data-en="José Mario delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise are outstanding." data-es="José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.">
-                            José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.
-                        </p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MR</div>
-                        <div class="author-info">
-                            <h4>María Rodríguez</h4>
-                            <p data-en="CEO, TechStart Solutions" data-es="CEO, TechStart Solutions">CEO, TechStart Solutions</p>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="testimonial-content">
-                        <p data-en="Working with José Mario was a game-changer for our startup. He created a mobile app that our users love, and his communication throughout the project was excellent." data-es="Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.">
-                            Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.
-                        </p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">CG</div>
-                        <div class="author-info">
-                            <h4>Carlos González</h4>
-                            <p data-en="Founder, InnovateTech" data-es="Fundador, InnovateTech">Fundador, InnovateTech</p>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="testimonial-content">
-                        <p data-en="The UI/UX design José Mario created for our platform is both beautiful and functional. Our user engagement increased by 40% after the redesign." data-es="El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.">
-                            El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.
-                        </p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AS</div>
-                        <div class="author-info">
-                            <h4>Ana Solís</h4>
-                            <p data-en="Product Manager, Digital Flow" data-es="Gerente de Producto, Digital Flow">Gerente de Producto, Digital Flow</p>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="testimonial-content">
-                        <p data-en="Professional, reliable, and incredibly talented. José Mario transformed our outdated website into a modern, responsive platform that drives results." data-es="Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.">
-                            Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.
-                        </p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">LM</div>
-                        <div class="author-info">
-                            <h4>Luis Méndez</h4>
-                            <p data-en="Director, CreativeAgency" data-es="Director, CreativeAgency">Director, CreativeAgency</p>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="testimonial-content">
-                        <p data-en="José Mario's expertise in full-stack development helped us launch our SaaS platform ahead of schedule. His code quality and architecture decisions were spot-on." data-es="La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.">
-                            La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.
-                        </p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">DP</div>
-                        <div class="author-info">
-                            <h4>Diana Pérez</h4>
-                            <p data-en="CTO, CloudSolutions" data-es="CTO, CloudSolutions">CTO, CloudSolutions</p>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="testimonial-content">
-                        <p data-en="From concept to deployment, José Mario guided us through every step. His collaborative approach and problem-solving skills made the entire process smooth and enjoyable." data-es="Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.">
-                            Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.
-                        </p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RV</div>
-                        <div class="author-info">
-                            <h4>Roberto Vargas</h4>
-                            <p data-en="Entrepreneur, Local Business" data-es="Emprendedor, Negocio Local">Emprendedor, Negocio Local</p>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2 data-en="Get In Touch" data-es="Contacto">Contacto</h2>
-                <p data-en="Ready to start your next project? Let's work together!" data-es="¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!">
-                    ¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!
-                </p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
-                    <h3 data-en="Contact Information" data-es="Información de Contacto">Información de Contacto</h3>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>josemarioarias12@gmail.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
-                        <div>
-                            <h4>WhatsApp</h4>
-                            <p>+506 6218-5607</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                        <div>
-                            <h4>GitHub</h4>
-                            <p>github.com/josemarioarias12</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <div>
-                            <h4 data-en="Location" data-es="Ubicación">Ubicación</h4>
-                            <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <i class="fas fa-clock" aria-hidden="true"></i>
-                        <div>
-                            <h4 data-en="Availability" data-es="Disponibilidad">Disponibilidad</h4>
-                            <p data-en="Monday - Friday: 8:00 AM - 6:00 PM (CST)" data-es="Lunes - Viernes: 8:00 AM - 6:00 PM (CST)">Lunes - Viernes: 8:00 AM - 6:00 PM (CST)</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form" data-aos="fade-left">
-                    <h3 data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</h3>
-                    
-                    <div class="form-status" id="form-status"></div>
-                    
-                    <form id="contact-form" novalidate>
-                        <div class="form-group">
-                            <label for="name" data-en="Name *" data-es="Nombre *">Nombre *</label>
-                            <input type="text" id="name" name="name" required 
-                                   placeholder="Tu nombre completo"
-                                   data-placeholder-en="Your full name"
-                                   data-placeholder-es="Tu nombre completo"
-                                   aria-describedby="name-error">
-                            <span class="error-message" id="name-error"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email" data-en="Email *" data-es="Correo *">Correo *</label>
-                            <input type="email" id="email" name="email" required 
-                                   placeholder="tu@email.com"
-                                   aria-describedby="email-error">
-                            <span class="error-message" id="email-error"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject" data-en="Subject *" data-es="Asunto *">Asunto *</label>
-                            <input type="text" id="subject" name="subject" required 
-                                   placeholder="Asunto del mensaje"
-                                   data-placeholder-en="Message subject"
-                                   data-placeholder-es="Asunto del mensaje"
-                                   aria-describedby="subject-error">
-                            <span class="error-message" id="subject-error"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message" data-en="Message *" data-es="Mensaje *">Mensaje *</label>
-                            <textarea id="message" name="message" rows="5" required 
-                                      placeholder="Cuéntame sobre tu proyecto..."
-                                      data-placeholder-en="Tell me about your project..."
-                                      data-placeholder-es="Cuéntame sobre tu proyecto..."
-                                      aria-describedby="message-error"></textarea>
-                            <span class="error-message" id="message-error"></span>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" id="submit-btn">
-                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                            <span data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</span>
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <a href="#home" class="logo" aria-label="José Mario Arias - Home">
+                    <img src="./letscodelogo.png" alt="LetsCode Logo" class="logo-img">
+                    <span class="logo-text">LetsCode</span>
+                </a>
+                <ul class="nav-menu" id="nav-menu" role="menubar">
+                    <li role="none"><a href="#home" role="menuitem" data-en="Home" data-es="Inicio">Inicio</a></li>
+                    <li role="none"><a href="#about" role="menuitem" data-en="About" data-es="Acerca">Acerca</a></li>
+                    <li role="none"><a href="#services" role="menuitem" data-en="Services" data-es="Servicios">Servicios</a></li>
+                    <li role="none"><a href="#portfolio" role="menuitem" data-en="Portfolio" data-es="Portafolio">Portafolio</a></li>
+                    <li role="none"><a href="#testimonials" role="menuitem" data-en="Testimonials" data-es="Testimonios">Testimonios</a></li>
+                    <li role="none"><a href="#contact" role="menuitem" data-en="Contact" data-es="Contacto">Contacto</a></li>
+                    <li role="none">
+                        <button class="language-switch" onclick="toggleLanguage()" id="lang-btn" aria-label="Switch language">
+                            EN
                         </button>
-                    </form>
-                </div>
+                    </li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4 data-en="Quick Links" data-es="Enlaces Rápidos">Enlaces Rápidos</h4>
-                    <p><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></p>
-                    <p><a href="#about" data-en="About" data-es="Acerca">Acerca</a></p>
-                    <p><a href="#services" data-en="Services" data-es="Servicios">Servicios</a></p>
-                    <p><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portafolio</a></p>
+        <div class="content">
+            <!-- Hero Section -->
+            <section class="hero" id="home" role="banner">
+                <div class="hero-container">
+                    <div class="hero-content" data-aos="fade-right">
+                        <h1 class="typewriter" data-en="Freelance Developer" data-es="Desarrollador Freelance">Desarrollador Freelance</h1>
+                        <p class="subtitle" data-en="Full Stack Developer & UI/UX Designer" data-es="Desarrollador Full Stack & Diseñador UI/UX">Desarrollador Full Stack & Diseñador UI/UX</p>
+                        <p data-en="Creating innovative digital solutions with modern technologies. Specialized in web development, mobile apps, and user experience design." data-es="Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.">
+                            Creando soluciones digitales innovadoras con tecnologías modernas. Especializado en desarrollo web, aplicaciones móviles y diseño de experiencia de usuario.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="#portfolio" class="btn btn-primary" aria-label="View my portfolio">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
+                                <span data-en="View Portfolio" data-es="Ver Portafolio">Ver Portafolio</span>
+                            </a>
+                            <button class="btn btn-secondary" onclick="downloadCV()" aria-label="Download my CV">
+                                <i class="fas fa-download" aria-hidden="true"></i>
+                                <span data-en="Download CV" data-es="Descargar CV">Descargar CV</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-image" data-aos="fade-left">
+                        <div class="profile-card animate-float">
+                            <div class="profile-image">
+                                <i class="fas fa-user-tie" aria-hidden="true"></i>
+                            </div>
+                            <h3 data-en="José Mario Arias" data-es="José Mario Arias">José Mario Arias</h3>
+                            <p data-en="Passionate about creating digital solutions that make a difference in people's lives." data-es="Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.">
+                                Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4 data-en="Services" data-es="Servicios">Servicios</h4>
-                    <p data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</p>
-                    <p data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</p>
-                    <p>UI/UX Design</p>
-                    <p data-en="E-commerce" data-es="E-commerce">E-commerce</p>
+            </section>
+
+            <!-- About Section -->
+            <section class="about" id="about">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2 data-en="About Me" data-es="Acerca de Mí">Acerca de Mí</h2>
+                        <p data-en="I am a Software Developer with a strong commitment to creating innovative and efficient technological solutions. I specialize in Full Stack Development" data-es="Soy desarrollador de Software con un fuerte compromiso por el desarrollo de soluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo Full Stack">
+                            Soy desarrollador de Software con un fuerte compromiso por el desarrollo de soluciones tecnológicas innovadoras y eficientes. Me especializo en desarrollo Full Stack
+                        </p>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-image" data-aos="fade-right">
+                            <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Developer illustration">
+                                <rect width="400" height="300" fill="url(#grad1)"/>
+                                <defs>
+                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#274C77;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#A3B4C4;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.2)"/>
+                                <text x="200" y="160" text-anchor="middle" fill="white" font-size="40" font-family="Arial">👨‍💻</text>
+                            </svg>
+                        </div>
+                        <div class="about-text" data-aos="fade-left">
+                            <h3 data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h3>
+                            <p data-en="I'm a freelance developer passionate about creating innovative digital solutions. With expertise in modern web technologies, I help businesses and individuals bring their ideas to life through clean, efficient, and user-friendly applications." data-es="Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.">
+                                Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.
+                            </p>
+                            
+                            <div class="skills-grid">
+                                <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
+                                    <i class="fab fa-html5" aria-hidden="true"></i>
+                                    <h4>Frontend</h4>
+                                    <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
+                                </div>
+                                <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="fas fa-server" aria-hidden="true"></i>
+                                    <h4>Backend</h4>
+                                    <p>Node.js, PHP, Python, Databases</p>
+                                </div>
+                                <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
+                                    <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                                    <h4 data-en="Mobile Development" data-es="Desarrollo Móvil">Desarrollo Móvil</h4>
+                                    <p>React Native, Flutter</p>
+                                </div>
+                                <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
+                                    <i class="fas fa-palette" aria-hidden="true"></i>
+                                    <h4>UI/UX Design</h4>
+                                    <p>Figma, Adobe XD, Photoshop</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4 data-en="Technologies" data-es="Tecnologías">Tecnologías</h4>
-                    <p>React & Vue.js</p>
-                    <p>Node.js & Python</p>
-                    <p>React Native & Flutter</p>
-                    <p>MongoDB & PostgreSQL</p>
+            </section>
+
+            <!-- Services Section -->
+            <section class="services" id="services">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2 data-en="My Services" data-es="Mis Servicios">Mis Servicios</h2>
+                        <p data-en="Professional services tailored to your needs" data-es="Servicios profesionales adaptados a tus necesidades">
+                            Servicios profesionales adaptados a tus necesidades
+                        </p>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
+                            <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
+                                Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
+                            </p>
+                        </div>
+                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
+                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                            <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
+                            <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
+                                Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
+                            </p>
+                        </div>
+                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-paint-brush" aria-hidden="true"></i>
+                            <h3>UI/UX Design</h3>
+                            <p data-en="User-centered design that combines aesthetics with functionality for optimal user experience." data-es="Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.">
+                                Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.
+                            </p>
+                        </div>
+                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            <h3 data-en="E-commerce Solutions" data-es="Soluciones E-commerce">Soluciones E-commerce</h3>
+                            <p data-en="Complete online stores with payment integration, inventory management, and analytics." data-es="Tiendas online completas con integración de pagos, gestión de inventario y análisis.">
+                                Tiendas online completas con integración de pagos, gestión de inventario y análisis.
+                            </p>
+                        </div>
+                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="500">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <h3 data-en="SEO Optimization" data-es="Optimización SEO">Optimización SEO</h3>
+                            <p data-en="Search engine optimization to improve your website's visibility and organic traffic." data-es="Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.">
+                                Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.
+                            </p>
+                        </div>
+                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="600">
+                            <i class="fas fa-tools" aria-hidden="true"></i>
+                            <h3 data-en="Maintenance & Support" data-es="Mantenimiento y Soporte">Mantenimiento y Soporte</h3>
+                            <p data-en="Ongoing maintenance, updates, and technical support for your digital projects." data-es="Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.">
+                                Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4 data-en="Contact" data-es="Contacto">Contacto</h4>
-                    <p>josemarioarias12@gmail.com</p>
-                    <p>+506 6218-5607</p>
-                    <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section class="portfolio" id="portfolio">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2 data-en="My Portfolio" data-es="Mi Portafolio">Mi Portafolio</h2>
+                        <p data-en="Featured projects that showcase my skills and creativity" data-es="Proyectos destacados que muestran mis habilidades y creatividad">
+                            Proyectos destacados que muestran mis habilidades y creatividad
+                        </p>
+                    </div>
+                    
+                    <div class="portfolio-filter" data-aos="fade-up" role="group" aria-label="Portfolio filter">
+                        <button class="filter-btn active" data-filter="all" data-en="All Projects" data-es="Todos">Todos</button>
+                        <button class="filter-btn" data-filter="web" data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</button>
+                        <button class="filter-btn" data-filter="mobile" data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</button>
+                        <button class="filter-btn" data-filter="design" data-en="UI/UX Design" data-es="Diseño UI/UX">Diseño UI/UX</button>
+                    </div>
+
+                    <div class="portfolio-grid" id="portfolio-grid">
+                        <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="100">
+                            <div class="portfolio-image">
+                                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                                <div class="portfolio-overlay">
+                                    <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-content">
+                                <h3 data-en="Analytics Dashboard" data-es="Dashboard de Análisis">Dashboard de Análisis</h3>
+                                <p data-en="Real-time data visualization dashboard with interactive charts" data-es="Dashboard de visualización de datos en tiempo real con gráficos interactivos">
+                                    Dashboard de visualización de datos en tiempo real con gráficos interactivos
+                                </p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Vue.js</span>
+                                    <span class="tech-tag">D3.js</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">PostgreSQL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="200">
+                            <div class="portfolio-image">
+                                <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                                <div class="portfolio-overlay">
+                                    <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-content">
+                                <h3 data-en="Task Management App" data-es="App de Gestión de Tareas">App de Gestión de Tareas</h3>
+                                <p data-en="Cross-platform mobile app for productivity and task management" data-es="App móvil multiplataforma para productividad y gestión de tareas">
+                                    App móvil multiplataforma para productividad y gestión de tareas
+                                </p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">React Native</span>
+                                    <span class="tech-tag">Firebase</span>
+                                    <span class="tech-tag">Redux</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
+                            <div class="portfolio-image">
+                                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                <div class="portfolio-overlay">
+                                    <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-content">
+                                <h3 data-en="E-commerce Platform" data-es="Plataforma E-commerce">Plataforma E-commerce</h3>
+                                <p data-en="Complete online store with payment integration and admin panel" data-es="Tienda online completa con integración de pagos y panel de administración">
+                                    Tienda online completa con integración de pagos y panel de administración
+                                </p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">MongoDB</span>
+                                    <span class="tech-tag">Stripe</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="design" data-aos="fade-up" data-aos-delay="400">
+                            <div class="portfolio-image">
+                                <i class="fas fa-palette" aria-hidden="true"></i>
+                                <div class="portfolio-overlay">
+                                    <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" aria-label="View design on Figma">
+                                        <i class="fab fa-figma" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-content">
+                                <h3 data-en="Restaurant App Design" data-es="Diseño App Restaurante">Diseño App Restaurante</h3>
+                                <p data-en="Complete UI/UX design for a restaurant ordering mobile application" data-es="Diseño UI/UX completo para una aplicación móvil de pedidos de restaurante">
+                                    Diseño UI/UX completo para una aplicación móvil de pedidos de restaurante
+                                </p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Figma</span>
+                                    <span class="tech-tag">Photoshop</span>
+                                    <span class="tech-tag">Illustrator</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="500">
+                            <div class="portfolio-image">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                <div class="portfolio-overlay">
+                                    <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-content">
+                                <h3 data-en="Learning Management System" data-es="Sistema de Gestión de Aprendizaje">Sistema de Gestión de Aprendizaje</h3>
+                                <p data-en="Online education platform with course management and video streaming" data-es="Plataforma de educación online con gestión de cursos y streaming de video">
+                                    Plataforma de educación online con gestión de cursos y streaming de video
+                                </p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Angular</span>
+                                    <span class="tech-tag">Laravel</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">AWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="600">
+                            <div class="portfolio-image">
+                                <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                                <div class="portfolio-overlay">
+                                    <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-content">
+                                <h3 data-en="Health Tracking App" data-es="App de Seguimiento de Salud">App de Seguimiento de Salud</h3>
+                                <p data-en="Fitness and health monitoring app with wearable device integration" data-es="App de monitoreo de fitness y salud con integración de dispositivos wearables">
+                                    App de monitoreo de fitness y salud con integración de dispositivos wearables
+                                </p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Flutter</span>
+                                    <span class="tech-tag">Dart</span>
+                                    <span class="tech-tag">HealthKit</span>
+                                    <span class="tech-tag">Firebase</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="social-links">
-                <a href="https://github.com/josemarioarias12" target="_blank" aria-label="GitHub profile">
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/jose-mario-arias-matamoros-407915133/" target="_blank" aria-label="LinkedIn profile">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="https://facebook.com/josemarioariasmatamoros" target="_blank" aria-label="Facebook profile">
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="https://instagram.com/josemarioarias12" target="_blank" aria-label="Instagram profile">
-                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="https://wa.me/50662185607" target="_blank" aria-label="WhatsApp contact">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                </a>
-            </div>
-            
-            <p>&copy; 2024 José Mario Arias. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">Todos los derechos reservados.</span></p>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials" id="testimonials">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2 data-en="What Clients Say" data-es="Lo que Dicen los Clientes">Lo que Dicen los Clientes</h2>
+                        <p data-en="Real feedback from satisfied clients who trusted me with their projects" data-es="Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos">
+                            Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos
+                        </p>
+                    </div>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="testimonial-content">
+                                <p data-en="José Mario delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise are outstanding." data-es="José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.">
+                                    José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.
+                                </p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">MR</div>
+                                <div class="author-info">
+                                    <h4>María Rodríguez</h4>
+                                    <p data-en="CEO, TechStart Solutions" data-es="CEO, TechStart Solutions">CEO, TechStart Solutions</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="testimonial-content">
+                                <p data-en="Working with José Mario was a game-changer for our startup. He created a mobile app that our users love, and his communication throughout the project was excellent." data-es="Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.">
+                                    Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.
+                                </p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">CG</div>
+                                <div class="author-info">
+                                    <h4>Carlos González</h4>
+                                    <p data-en="Founder, InnovateTech" data-es="Fundador, InnovateTech">Fundador, InnovateTech</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="testimonial-content">
+                                <p data-en="The UI/UX design José Mario created for our platform is both beautiful and functional. Our user engagement increased by 40% after the redesign." data-es="El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.">
+                                    El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.
+                                </p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">AS</div>
+                                <div class="author-info">
+                                    <h4>Ana Solís</h4>
+                                    <p data-en="Product Manager, Digital Flow" data-es="Gerente de Producto, Digital Flow">Gerente de Producto, Digital Flow</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                            <div class="testimonial-content">
+                                <p data-en="Professional, reliable, and incredibly talented. José Mario transformed our outdated website into a modern, responsive platform that drives results." data-es="Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.">
+                                    Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.
+                                </p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">LM</div>
+                                <div class="author-info">
+                                    <h4>Luis Méndez</h4>
+                                    <p data-en="Director, CreativeAgency" data-es="Director, CreativeAgency">Director, CreativeAgency</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
+                            <div class="testimonial-content">
+                                <p data-en="José Mario's expertise in full-stack development helped us launch our SaaS platform ahead of schedule. His code quality and architecture decisions were spot-on." data-es="La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.">
+                                    La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.
+                                </p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">DP</div>
+                                <div class="author-info">
+                                    <h4>Diana Pérez</h4>
+                                    <p data-en="CTO, CloudSolutions" data-es="CTO, CloudSolutions">CTO, CloudSolutions</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
+                            <div class="testimonial-content">
+                                <p data-en="From concept to deployment, José Mario guided us through every step. His collaborative approach and problem-solving skills made the entire process smooth and enjoyable." data-es="Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.">
+                                    Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.
+                                </p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">RV</div>
+                                <div class="author-info">
+                                    <h4>Roberto Vargas</h4>
+                                    <p data-en="Entrepreneur, Local Business" data-es="Emprendedor, Negocio Local">Emprendedor, Negocio Local</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact" id="contact">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2 data-en="Get In Touch" data-es="Contacto">Contacto</h2>
+                        <p data-en="Ready to start your next project? Let's work together!" data-es="¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!">
+                            ¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!
+                        </p>
+                    </div>
+                    
+                    <div class="contact-content">
+                        <div class="contact-info" data-aos="fade-right">
+                            <h3 data-en="Contact Information" data-es="Información de Contacto">Información de Contacto</h3>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>josemarioarias12@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                <div>
+                                    <h4>WhatsApp</h4>
+                                    <p>+506 6218-5607</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <div>
+                                    <h4>GitHub</h4>
+                                    <p>github.com/josemarioarias12</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <div>
+                                    <h4 data-en="Location" data-es="Ubicación">Ubicación</h4>
+                                    <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <div>
+                                    <h4 data-en="Availability" data-es="Disponibilidad">Disponibilidad</h4>
+                                    <p data-en="Monday - Friday: 8:00 AM - 6:00 PM (CST)" data-es="Lunes - Viernes: 8:00 AM - 6:00 PM (CST)">Lunes - Viernes: 8:00 AM - 6:00 PM (CST)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form" data-aos="fade-left">
+                            <h3 data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</h3>
+                            
+                            <div class="form-status" id="form-status"></div>
+                            
+                            <form id="contact-form" novalidate>
+                                <div class="form-group">
+                                    <label for="name" data-en="Name *" data-es="Nombre *">Nombre *</label>
+                                    <input type="text" id="name" name="name" required 
+                                           placeholder="Tu nombre completo"
+                                           data-placeholder-en="Your full name"
+                                           data-placeholder-es="Tu nombre completo"
+                                           aria-describedby="name-error">
+                                    <span class="error-message" id="name-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" data-en="Email *" data-es="Correo *">Correo *</label>
+                                    <input type="email" id="email" name="email" required 
+                                           placeholder="tu@email.com"
+                                           aria-describedby="email-error">
+                                    <span class="error-message" id="email-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject" data-en="Subject *" data-es="Asunto *">Asunto *</label>
+                                    <input type="text" id="subject" name="subject" required 
+                                           placeholder="Asunto del mensaje"
+                                           data-placeholder-en="Message subject"
+                                           data-placeholder-es="Asunto del mensaje"
+                                           aria-describedby="subject-error">
+                                    <span class="error-message" id="subject-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message" data-en="Message *" data-es="Mensaje *">Mensaje *</label>
+                                    <textarea id="message" name="message" rows="5" required 
+                                              placeholder="Cuéntame sobre tu proyecto..."
+                                              data-placeholder-en="Tell me about your project..."
+                                              data-placeholder-es="Cuéntame sobre tu proyecto..."
+                                              aria-describedby="message-error"></textarea>
+                                    <span class="error-message" id="message-error"></span>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary" id="submit-btn">
+                                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                    <span data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </footer>
+
+        <!-- Footer - Now properly positioned at bottom -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4 data-en="Quick Links" data-es="Enlaces Rápidos">Enlaces Rápidos</h4>
+                        <p><a href="#home" data-en="Home" data-es="Inicio">Inicio</a></p>
+                        <p><a href="#about" data-en="About" data-es="Acerca">Acerca</a></p>
+                        <p><a href="#services" data-en="Services" data-es="Servicios">Servicios</a></p>
+                        <p><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portafolio</a></p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 data-en="Services" data-es="Servicios">Servicios</h4>
+                        <p data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</p>
+                        <p data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</p>
+                        <p>UI/UX Design</p>
+                        <p data-en="E-commerce" data-es="E-commerce">E-commerce</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 data-en="Technologies" data-es="Tecnologías">Tecnologías</h4>
+                        <p>React & Vue.js</p>
+                        <p>Node.js & Python</p>
+                        <p>React Native & Flutter</p>
+                        <p>MongoDB & PostgreSQL</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 data-en="Contact" data-es="Contacto">Contacto</h4>
+                        <p>josemarioarias12@gmail.com</p>
+                        <p>+506 6218-5607</p>
+                        <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://github.com/josemarioarias12" target="_blank" aria-label="GitHub profile">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/jose-mario-arias-matamoros-407915133/" target="_blank" aria-label="LinkedIn profile">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://facebook.com/josemarioariasmatamoros" target="_blank" aria-label="Facebook profile">
+                        <i class="fab fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://instagram.com/josemarioarias12" target="_blank" aria-label="Instagram profile">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://wa.me/50662185607" target="_blank" aria-label="WhatsApp contact">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    </a>
+                </div>
+                
+                <p>&copy; 2024 José Mario Arias. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">Todos los derechos reservados.</span></p>
+            </div>
+        </footer>
+    </div>
 
     <!-- Floating Elements -->
     <a href="https://wa.me/50662185607" class="whatsapp-float" target="_blank" aria-label="Contact via WhatsApp">
@@ -2135,13 +2258,16 @@
             }, Math.max(1000, Math.min(loadTime, 2000)));
         });
 
-        // Enhanced Navbar Scroll Effect
+        // Enhanced Navbar Scroll Effect - IMPROVED FOR FIXED HEADER
         let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', function() {
+        let ticking = false;
+
+        function updateNavbar() {
             const navbar = document.getElementById('navbar');
             const scrollTop = document.getElementById('scroll-top');
             const currentScrollY = window.scrollY;
             
+            // Add scrolled class for styling
             if (currentScrollY > 50) {
                 navbar.classList.add('scrolled');
                 scrollTop.classList.add('show');
@@ -2150,15 +2276,21 @@
                 scrollTop.classList.remove('show');
             }
             
-            // Hide navbar on scroll down, show on scroll up
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
+            // Keep navbar always visible (remove hide on scroll behavior for better UX)
+            navbar.style.transform = 'translateY(0)';
             
             lastScrollY = currentScrollY;
-        });
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
 
         // Enhanced Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -2207,7 +2339,9 @@
                 const target = document.querySelector(targetId);
                 
                 if (target) {
-                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const offsetTop = target.offsetTop - navbarHeight - 20; // Extra padding
+                    
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
@@ -2482,8 +2616,10 @@
         window.addEventListener('load', function() {
             setTimeout(async () => {
                 const heroTitle = document.querySelector('.hero-content h1');
-                const originalText = heroTitle.textContent;
-                await typeWriter(heroTitle, originalText, 80);
+                if (heroTitle) {
+                    const originalText = heroTitle.textContent;
+                    await typeWriter(heroTitle, originalText, 80);
+                }
             }, 1500);
         });
 
@@ -2532,7 +2668,7 @@
             observer.observe(section);
         });
 
-        // Particle effect system
+        // Particle effect system (only for desktop)
         class ParticleSystem {
             constructor(container) {
                 this.container = container;
@@ -2598,21 +2734,13 @@
                     opacity: 0;
                 }
             }
-            
-            .error-message {
-                color: var(--error-color);
-                font-size: 0.8rem;
-                margin-top: 0.25rem;
-                display: block;
-                min-height: 1rem;
-            }
         `;
         document.head.appendChild(particleStyle);
 
-        // Initialize particle system for hero section
+        // Initialize particle system for hero section (only on desktop)
         setTimeout(() => {
             const hero = document.querySelector('.hero');
-            if (hero && !('ontouchstart' in window)) { // Only on desktop
+            if (hero && !('ontouchstart' in window) && window.innerWidth > 768) {
                 const particleSystem = new ParticleSystem(hero);
                 particleSystem.start();
             }
@@ -2630,7 +2758,7 @@
             });
         }, 8000);
 
-        // Testimonials carousel/slider functionality
+        // Testimonials carousel/slider functionality for mobile
         let currentTestimonial = 0;
         const testimonials = document.querySelectorAll('.testimonial-card');
         
@@ -2685,7 +2813,7 @@
         ║   💻 github.com/josemarioarias12     ║
         ║                                      ║
         ║   🚀 Portfolio v2.0 Enhanced         ║
-        ║   ✨ With SEO & Accessibility        ║
+        ║   ✨ Fixed Header & Footer           ║
         ╚══════════════════════════════════════╝
         `, 
         'color: #274C77; font-family: monospace; font-size: 12px; font-weight: bold;'
@@ -2715,54 +2843,3 @@
     </script>
 </body>
 </html>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="E-commerce Platform" data-es="Plataforma E-commerce">Plataforma E-commerce</h3>
-                        <p data-en="Complete online store with payment integration and admin panel" data-es="Tienda online completa con integración de pagos y panel de administración">
-                            Tienda online completa con integración de pagos y panel de administración
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="mobile" data-aos="fade-up" data-aos-delay="200">
-                    <div class="portfolio-image">
-                        <i class="fas fa-mobile-alt" aria-hidden="true"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
-                                <i class="fas fa-eye" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-sm" aria-label="View code on GitHub">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 data-en="Task Management App" data-es="App de Gestión de Tareas">App de Gestión de Tareas</h3>
-                        <p data-en="Cross-platform mobile app for productivity and task management" data-es="App móvil multiplataforma para productividad y gestión de tareas">
-                            App móvil multiplataforma para productividad y gestión de tareas
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Redux</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
-                    <div class="portfolio-image">
-                        <i class="fas fa-chart-line" aria-hidden="true"></i>
-                        <div class="portfolio-overlay">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="View project">
-                                <i class="fas fa-eye" aria-hidden="true"></i>
