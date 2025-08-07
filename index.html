@@ -194,6 +194,27 @@
             }
         }
 
+        @keyframes codeFlow {
+            0% { transform: translateY(0px); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+            100% { transform: translateY(-40px); opacity: 0; }
+        }
+
+        @keyframes techIconFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            25% { 
+                transform: translateY(-10px) rotate(5deg); 
+            }
+            50% { 
+                transform: translateY(-5px) rotate(-5deg); 
+            }
+            75% { 
+                transform: translateY(-15px) rotate(3deg); 
+            }
+        }
+
         /* Interactive elements */
         .interactive-bg {
             position: relative;
@@ -499,17 +520,26 @@
             height: 200px;
             border-radius: 50%;
             margin: 0 auto 1rem;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
             transition: transform 0.3s ease;
         }
 
         .profile-card:hover .profile-image {
             transform: scale(1.1) rotate(5deg);
+        }
+
+        .profile-card:hover .profile-image img {
+            transform: scale(1.05);
         }
 
         /* Sections - Adjusted padding for fixed header */
@@ -584,37 +614,82 @@
             z-index: 2;
         }
 
-        .about-image {
+        /* Animated Interactive Developer Visual */
+        .dev-animation {
             position: relative;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: 20px;
-            bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
             background: var(--gradient);
             border-radius: 20px;
-            z-index: -1;
-            transition: transform 0.3s ease;
-        }
-
-        .about-image:hover::before {
-            transform: rotate(3deg);
-        }
-
-        .about-img {
-            width: 100%;
-            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
         }
 
-        .about-image:hover .about-img {
-            transform: scale(1.05);
+        .dev-animation::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color), var(--secondary-color));
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.8;
         }
+
+        .code-screen {
+            width: 300px;
+            height: 200px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .code-line {
+            height: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            opacity: 0;
+            animation: codeFlow 3s linear infinite;
+        }
+
+        .code-line:nth-child(1) { background: #ff6b6b; width: 80%; animation-delay: 0s; }
+        .code-line:nth-child(2) { background: #4ecdc4; width: 60%; animation-delay: 0.3s; }
+        .code-line:nth-child(3) { background: #45b7d1; width: 90%; animation-delay: 0.6s; }
+        .code-line:nth-child(4) { background: #96ceb4; width: 70%; animation-delay: 0.9s; }
+        .code-line:nth-child(5) { background: #feca57; width: 85%; animation-delay: 1.2s; }
+        .code-line:nth-child(6) { background: #ff9ff3; width: 65%; animation-delay: 1.5s; }
+
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .tech-icon {
+            position: absolute;
+            color: rgba(255,255,255,0.8);
+            font-size: 24px;
+            animation: techIconFloat 4s ease-in-out infinite;
+        }
+
+        .tech-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .tech-icon:nth-child(2) { top: 20%; right: 10%; animation-delay: 0.8s; }
+        .tech-icon:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 1.6s; }
+        .tech-icon:nth-child(4) { bottom: 10%; right: 15%; animation-delay: 2.4s; }
+        .tech-icon:nth-child(5) { top: 50%; left: 5%; animation-delay: 3.2s; }
+        .tech-icon:nth-child(6) { top: 60%; right: 5%; animation-delay: 4s; }
 
         .skills-grid {
             display: grid;
@@ -665,48 +740,108 @@
             transform: scale(1.2) rotate(5deg);
         }
 
-        /* Services Section */
-        .services-grid {
+        /* Services Section - Enhanced Catalog Style */
+        .services-catalog {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 2rem;
         }
 
-        .service-card {
+        .service-catalog-item {
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border-left: 5px solid var(--accent-color);
         }
 
-        .service-card::before {
+        .service-catalog-item::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: var(--gradient);
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
+        .service-catalog-item:hover::before {
+            opacity: 0.05;
+        }
+
+        .service-catalog-item:hover {
+            transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow-hover);
+            border-left-color: var(--primary-color);
         }
 
-        .service-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
+        .service-catalog-item * {
+            position: relative;
+            z-index: 2;
         }
 
-        .service-card:hover i {
+        .service-bullet {
+            font-size: 1.5rem;
             color: var(--accent-color);
-            transform: scale(1.1);
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .service-description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-price::before {
+            content: '💰';
+            font-size: 1.2rem;
+        }
+
+        .service-features {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .service-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .service-feature::before {
+            content: '✓';
+            color: var(--success-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
         }
 
         /* Portfolio Section */
@@ -845,104 +980,6 @@
             transform: scale(1.05);
         }
 
-        /* Testimonials Section */
-        .testimonials {
-            padding: 5rem 0;
-            background: var(--primary-color);
-            color: var(--text-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonials::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="100" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="600" r="150" fill="rgba(255,255,255,0.03)"/></svg>');
-            background-size: 1000px 1000px;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .testimonial-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 4rem;
-            color: var(--accent-color);
-            font-family: serif;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .testimonial-content {
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .author-info h4 {
-            margin-bottom: 0.2rem;
-            color: var(--text-light);
-        }
-
-        .author-info p {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .rating {
-            display: flex;
-            gap: 0.2rem;
-            margin-top: 0.5rem;
-        }
-
-        .rating i {
-            color: #ffd700;
-        }
-
         /* Contact Section */
         .contact {
             background: var(--primary-color);
@@ -1079,7 +1116,7 @@
             text-align: center;
             padding: 3rem 0 2rem;
             position: relative;
-            margin-top: auto; /* This pushes footer to bottom */
+            margin-top: auto;
         }
 
         .footer::before {
@@ -1341,9 +1378,8 @@
             }
 
             .skills-grid,
-            .services-grid,
-            .portfolio-grid,
-            .testimonials-grid {
+            .services-catalog,
+            .portfolio-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1373,6 +1409,16 @@
 
             .footer-content {
                 text-align: center;
+            }
+
+            .dev-animation {
+                max-width: 300px;
+                height: 300px;
+            }
+
+            .code-screen {
+                width: 250px;
+                height: 150px;
             }
         }
 
@@ -1428,6 +1474,14 @@
                 width: 45px;
                 height: 45px;
                 font-size: 1rem;
+            }
+
+            .services-catalog {
+                grid-template-columns: 1fr;
+            }
+
+            .service-catalog-item {
+                padding: 2rem 1.5rem;
             }
         }
 
@@ -1531,7 +1585,6 @@
                     <li role="none"><a href="#about" role="menuitem" data-en="About" data-es="Acerca">Acerca</a></li>
                     <li role="none"><a href="#services" role="menuitem" data-en="Services" data-es="Servicios">Servicios</a></li>
                     <li role="none"><a href="#portfolio" role="menuitem" data-en="Portfolio" data-es="Portafolio">Portafolio</a></li>
-                    <li role="none"><a href="#testimonials" role="menuitem" data-en="Testimonials" data-es="Testimonios">Testimonios</a></li>
                     <li role="none"><a href="#contact" role="menuitem" data-en="Contact" data-es="Contacto">Contacto</a></li>
                     <li role="none">
                         <button class="language-switch" onclick="toggleLanguage()" id="lang-btn" aria-label="Switch language">
@@ -1569,7 +1622,7 @@
                     <div class="hero-image" data-aos="fade-left">
                         <div class="profile-card animate-float">
                             <div class="profile-image">
-                                <img src="josemario.png" alt="Foto de José Mario Arias" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                                <img src="josemario.png" alt="Foto de José Mario Arias">
                             </div>
                             <h3 data-en="José Mario Arias" data-es="José Mario Arias">José Mario Arias</h3>
                             <p data-en="Passionate about creating digital solutions that make a difference in people's lives." data-es="Apasionado por crear soluciones digitales que marquen la diferencia en la vida de las personas.">
@@ -1591,17 +1644,24 @@
                     </div>
                     <div class="about-content">
                         <div class="about-image" data-aos="fade-right">
-                            <svg class="about-img" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Developer illustration">
-                                <rect width="400" height="300" fill="url(#grad1)"/>
-                                <defs>
-                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#274C77;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#A3B4C4;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                                <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.2)"/>
-                                <text x="200" y="160" text-anchor="middle" fill="white" font-size="40" font-family="Arial">👨‍💻</text>
-                            </svg>
+                            <div class="dev-animation">
+                                <div class="code-screen">
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                </div>
+                                <div class="floating-icons">
+                                    <div class="tech-icon"><i class="fab fa-react"></i></div>
+                                    <div class="tech-icon"><i class="fab fa-node-js"></i></div>
+                                    <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+                                    <div class="tech-icon"><i class="fab fa-python"></i></div>
+                                    <div class="tech-icon"><i class="fas fa-database"></i></div>
+                                    <div class="tech-icon"><i class="fab fa-html5"></i></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="about-text" data-aos="fade-left">
                             <h3 data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h3>
@@ -1640,53 +1700,112 @@
             <section class="services" id="services">
                 <div class="container">
                     <div class="section-title" data-aos="fade-up">
-                        <h2 data-en="Services" data-es="Servicios">Servicios</h2>
-                        <p data-en="Professional services tailored to your needs." data-es="Servicios profesionales adaptados a tus necesidades">
-                            Servicios profesionales adaptados a tus necesidades.
+                        <h2 data-en="Services & Pricing" data-es="Servicios y Precios">Servicios y Precios</h2>
+                        <p data-en="Professional development services with transparent pricing for your digital projects." data-es="Servicios de desarrollo profesional con precios transparentes para tus proyectos digitales.">
+                            Servicios de desarrollo profesional con precios transparentes para tus proyectos digitales.
                         </p>
                     </div>
-                    <div class="services-grid">
-                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
-                            <i class="fas fa-code" aria-hidden="true"></i>
-                            <h3 data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</h3>
-                            <p data-en="Custom websites and web applications built with modern technologies and best practices." data-es="Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.">
-                                Sitios web personalizados y aplicaciones web construidas con tecnologías modernas y mejores prácticas.
+                    <div class="services-catalog">
+                        <div class="service-catalog-item interactive-bg" data-aos="fade-up" data-aos-delay="100">
+                            <h3 class="service-title">
+                                <span class="service-bullet">●</span>
+                                <span data-en="Informative Website" data-es="Página web informativa">Página web informativa</span>
+                            </h3>
+                            <p class="service-description" data-en="Ideal to showcase your business, services and contact information." data-es="Ideal para mostrar tu negocio, servicios y datos de contacto.">
+                                Ideal para mostrar tu negocio, servicios y datos de contacto.
                             </p>
+                            <div class="service-features">
+                                <div class="service-feature" data-en="Responsive Design" data-es="Diseño Responsivo">Diseño Responsivo</div>
+                                <div class="service-feature" data-en="SEO Optimized" data-es="SEO Optimizado">SEO Optimizado</div>
+                                <div class="service-feature" data-en="Contact Forms" data-es="Formularios de Contacto">Formularios de Contacto</div>
+                                <div class="service-feature" data-en="Social Media Integration" data-es="Integración Redes Sociales">Integración Redes Sociales</div>
+                            </div>
+                            <div class="service-price" data-en="From ₡250,000" data-es="Desde ₡250,000">Desde ₡250,000</div>
                         </div>
-                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="200">
-                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
-                            <h3 data-en="Mobile Apps" data-es="Apps Móviles">Apps Móviles</h3>
-                            <p data-en="Cross-platform mobile applications for iOS and Android with native performance." data-es="Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.">
-                                Aplicaciones móviles multiplataforma para iOS y Android con rendimiento nativo.
+
+                        <div class="service-catalog-item interactive-bg" data-aos="fade-up" data-aos-delay="200">
+                            <h3 class="service-title">
+                                <span class="service-bullet">●</span>
+                                <span data-en="Complete Slack/Teams System" data-es="Sistema completo tipo Slack/Teams">Sistema completo tipo Slack/Teams</span>
+                            </h3>
+                            <p class="service-description" data-en="Internal communication for companies: chat, channels, users, files." data-es="Comunicación interna para empresas: chat, canales, usuarios, archivos.">
+                                Comunicación interna para empresas: chat, canales, usuarios, archivos.
                             </p>
+                            <div class="service-features">
+                                <div class="service-feature" data-en="Real-time Chat" data-es="Chat en Tiempo Real">Chat en Tiempo Real</div>
+                                <div class="service-feature" data-en="File Sharing" data-es="Compartir Archivos">Compartir Archivos</div>
+                                <div class="service-feature" data-en="User Management" data-es="Gestión de Usuarios">Gestión de Usuarios</div>
+                                <div class="service-feature" data-en="Channel Organization" data-es="Organización por Canales">Organización por Canales</div>
+                            </div>
+                            <div class="service-price" data-en="From ₡1,000,000" data-es="Desde ₡1,000,000">Desde ₡1,000,000</div>
                         </div>
-                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="300">
-                            <i class="fas fa-paint-brush" aria-hidden="true"></i>
-                            <h3>UI/UX Design</h3>
-                            <p data-en="User-centered design that combines aesthetics with functionality for optimal user experience." data-es="Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.">
-                                Diseño centrado en el usuario que combina estética con funcionalidad para una experiencia óptima.
+
+                        <div class="service-catalog-item interactive-bg" data-aos="fade-up" data-aos-delay="300">
+                            <h3 class="service-title">
+                                <span class="service-bullet">●</span>
+                                <span data-en="Online Store" data-es="Tienda en línea">Tienda en línea</span>
+                            </h3>
+                            <p class="service-description" data-en="Product catalog, shopping cart and online payments." data-es="Catálogo de productos, carrito de compras y pagos en línea.">
+                                Catálogo de productos, carrito de compras y pagos en línea.
                             </p>
+                            <div class="service-features">
+                                <div class="service-feature" data-en="Payment Integration" data-es="Integración de Pagos">Integración de Pagos</div>
+                                <div class="service-feature" data-en="Inventory Management" data-es="Gestión de Inventario">Gestión de Inventario</div>
+                                <div class="service-feature" data-en="Order Tracking" data-es="Seguimiento de Pedidos">Seguimiento de Pedidos</div>
+                                <div class="service-feature" data-en="Admin Dashboard" data-es="Panel Administrativo">Panel Administrativo</div>
+                            </div>
+                            <div class="service-price" data-en="From ₡450,000" data-es="Desde ₡450,000">Desde ₡450,000</div>
                         </div>
-                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                            <h3 data-en="E-commerce Solutions" data-es="Soluciones E-commerce">Soluciones E-commerce</h3>
-                            <p data-en="Complete online stores with payment integration, inventory management, and analytics." data-es="Tiendas online completas con integración de pagos, gestión de inventario y análisis.">
-                                Tiendas online completas con integración de pagos, gestión de inventario y análisis.
+
+                        <div class="service-catalog-item interactive-bg" data-aos="fade-up" data-aos-delay="400">
+                            <h3 class="service-title">
+                                <span class="service-bullet">●</span>
+                                <span data-en="Reservation System" data-es="Sistema de reservas">Sistema de reservas</span>
+                            </h3>
+                            <p class="service-description" data-en="Perfect for hotels, salons, clinics or any appointment-based business." data-es="Perfecto para hoteles, salones, consultorios o cualquier negocio con citas.">
+                                Perfecto para hoteles, salones, consultorios o cualquier negocio con citas.
                             </p>
+                            <div class="service-features">
+                                <div class="service-feature" data-en="Calendar Integration" data-es="Integración con Calendario">Integración con Calendario</div>
+                                <div class="service-feature" data-en="Email Notifications" data-es="Notificaciones por Email">Notificaciones por Email</div>
+                                <div class="service-feature" data-en="Payment Processing" data-es="Procesamiento de Pagos">Procesamiento de Pagos</div>
+                                <div class="service-feature" data-en="Customer Management" data-es="Gestión de Clientes">Gestión de Clientes</div>
+                            </div>
+                            <div class="service-price" data-en="From ₡400,000" data-es="Desde ₡400,000">Desde ₡400,000</div>
                         </div>
-                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="500">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                            <h3 data-en="SEO Optimization" data-es="Optimización SEO">Optimización SEO</h3>
-                            <p data-en="Search engine optimization to improve your website's visibility and organic traffic." data-es="Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.">
-                                Optimización para motores de búsqueda para mejorar la visibilidad y tráfico orgánico de tu sitio.
+
+                        <div class="service-catalog-item interactive-bg" data-aos="fade-up" data-aos-delay="500">
+                            <h3 class="service-title">
+                                <span class="service-bullet">●</span>
+                                <span data-en="Custom Admin Panel" data-es="Panel administrativo personalizado">Panel administrativo personalizado</span>
+                            </h3>
+                            <p class="service-description" data-en="To manage users, sales, inventory or other operations." data-es="Para gestionar usuarios, ventas, inventario u otras operaciones.">
+                                Para gestionar usuarios, ventas, inventario u otras operaciones.
                             </p>
+                            <div class="service-features">
+                                <div class="service-feature" data-en="Custom Dashboards" data-es="Dashboards Personalizados">Dashboards Personalizados</div>
+                                <div class="service-feature" data-en="Data Analytics" data-es="Análisis de Datos">Análisis de Datos</div>
+                                <div class="service-feature" data-en="Report Generation" data-es="Generación de Reportes">Generación de Reportes</div>
+                                <div class="service-feature" data-en="User Permissions" data-es="Permisos de Usuario">Permisos de Usuario</div>
+                            </div>
+                            <div class="service-price" data-en="From ₡500,000" data-es="Desde ₡500,000">Desde ₡500,000</div>
                         </div>
-                        <div class="service-card interactive-bg" data-aos="fade-up" data-aos-delay="600">
-                            <i class="fas fa-tools" aria-hidden="true"></i>
-                            <h3 data-en="Maintenance & Support" data-es="Mantenimiento y Soporte">Mantenimiento y Soporte</h3>
-                            <p data-en="Ongoing maintenance, updates, and technical support for your digital projects." data-es="Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.">
-                                Mantenimiento continuo, actualizaciones y soporte técnico para tus proyectos digitales.
+
+                        <div class="service-catalog-item interactive-bg" data-aos="fade-up" data-aos-delay="600">
+                            <h3 class="service-title">
+                                <span class="service-bullet">●</span>
+                                <span data-en="Login System with Roles" data-es="Sistema de inicio de sesión con roles">Sistema de inicio de sesión con roles</span>
+                            </h3>
+                            <p class="service-description" data-en="Access with differentiated permissions for administrators, employees or customers." data-es="Acceso con permisos diferenciados para administradores, empleados o clientes.">
+                                Acceso con permisos diferenciados para administradores, empleados o clientes.
                             </p>
+                            <div class="service-features">
+                                <div class="service-feature" data-en="Multi-role Authentication" data-es="Autenticación Multi-rol">Autenticación Multi-rol</div>
+                                <div class="service-feature" data-en="Security Features" data-es="Características de Seguridad">Características de Seguridad</div>
+                                <div class="service-feature" data-en="Password Recovery" data-es="Recuperación de Contraseña">Recuperación de Contraseña</div>
+                                <div class="service-feature" data-en="Session Management" data-es="Gestión de Sesiones">Gestión de Sesiones</div>
+                            </div>
+                            <div class="service-price" data-en="From ₡300,000" data-es="Desde ₡300,000">Desde ₡300,000</div>
                         </div>
                     </div>
                 </div>
@@ -1696,7 +1815,7 @@
             <section class="portfolio" id="portfolio">
                 <div class="container">
                     <div class="section-title" data-aos="fade-up">
-                        <h2 data-en="Galery" data-es="Galeria">Galeria</h2>
+                        <h2 data-en="Gallery" data-es="Galería">Galería</h2>
                         <p data-en="Featured projects that showcase my skills and creativity" data-es="Proyectos destacados que muestran mis habilidades y creatividad">
                             Proyectos destacados que muestran mis habilidades y creatividad
                         </p>
@@ -1860,152 +1979,6 @@
                                     <span class="tech-tag">Dart</span>
                                     <span class="tech-tag">HealthKit</span>
                                     <span class="tech-tag">Firebase</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Testimonials Section -->
-            <section class="testimonials" id="testimonials">
-                <div class="container">
-                    <div class="section-title" data-aos="fade-up">
-                        <h2 data-en="What Clients Say" data-es="Lo que Dicen los Clientes">Lo que Dicen los Clientes</h2>
-                        <p data-en="Real feedback from satisfied clients who trusted me with their projects" data-es="Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos">
-                            Testimonios reales de clientes satisfechos que confiaron en mí para sus proyectos
-                        </p>
-                    </div>
-                    
-                    <div class="testimonials-grid">
-                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                            <div class="testimonial-content">
-                                <p data-en="José Mario delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise are outstanding." data-es="José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.">
-                                    José Mario entregó una plataforma de e-commerce excepcional que superó nuestras expectativas. Su atención al detalle y experiencia técnica son sobresalientes.
-                                </p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">MR</div>
-                                <div class="author-info">
-                                    <h4>María Rodríguez</h4>
-                                    <p data-en="CEO, TechStart Solutions" data-es="CEO, TechStart Solutions">CEO, TechStart Solutions</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                            <div class="testimonial-content">
-                                <p data-en="Working with José Mario was a game-changer for our startup. He created a mobile app that our users love, and his communication throughout the project was excellent." data-es="Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.">
-                                    Trabajar con José Mario fue un cambio radical para nuestra startup. Creó una aplicación móvil que nuestros usuarios aman, y su comunicación durante todo el proyecto fue excelente.
-                                </p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">CG</div>
-                                <div class="author-info">
-                                    <h4>Carlos González</h4>
-                                    <p data-en="Founder, InnovateTech" data-es="Fundador, InnovateTech">Fundador, InnovateTech</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                            <div class="testimonial-content">
-                                <p data-en="The UI/UX design José Mario created for our platform is both beautiful and functional. Our user engagement increased by 40% after the redesign." data-es="El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.">
-                                    El diseño UI/UX que José Mario creó para nuestra plataforma es hermoso y funcional. Nuestro engagement de usuarios aumentó un 40% después del rediseño.
-                                </p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">AS</div>
-                                <div class="author-info">
-                                    <h4>Ana Solís</h4>
-                                    <p data-en="Product Manager, Digital Flow" data-es="Gerente de Producto, Digital Flow">Gerente de Producto, Digital Flow</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
-                            <div class="testimonial-content">
-                                <p data-en="Professional, reliable, and incredibly talented. José Mario transformed our outdated website into a modern, responsive platform that drives results." data-es="Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.">
-                                    Profesional, confiable e increíblemente talentoso. José Mario transformó nuestro sitio web obsoleto en una plataforma moderna y responsiva que genera resultados.
-                                </p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">LM</div>
-                                <div class="author-info">
-                                    <h4>Luis Méndez</h4>
-                                    <p data-en="Director, CreativeAgency" data-es="Director, CreativeAgency">Director, CreativeAgency</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
-                            <div class="testimonial-content">
-                                <p data-en="José Mario's expertise in full-stack development helped us launch our SaaS platform ahead of schedule. His code quality and architecture decisions were spot-on." data-es="La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.">
-                                    La experiencia de José Mario en desarrollo full-stack nos ayudó a lanzar nuestra plataforma SaaS antes de lo programado. Su calidad de código y decisiones de arquitectura fueron perfectas.
-                                </p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">DP</div>
-                                <div class="author-info">
-                                    <h4>Diana Pérez</h4>
-                                    <p data-en="CTO, CloudSolutions" data-es="CTO, CloudSolutions">CTO, CloudSolutions</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="testimonial-content">
-                                <p data-en="From concept to deployment, José Mario guided us through every step. His collaborative approach and problem-solving skills made the entire process smooth and enjoyable." data-es="Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.">
-                                    Desde el concepto hasta el despliegue, José Mario nos guió en cada paso. Su enfoque colaborativo y habilidades para resolver problemas hicieron que todo el proceso fuera fluido y agradable.
-                                </p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">RV</div>
-                                <div class="author-info">
-                                    <h4>Roberto Vargas</h4>
-                                    <p data-en="Entrepreneur, Local Business" data-es="Emprendedor, Negocio Local">Emprendedor, Negocio Local</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2632,7 +2605,7 @@
         }
         
         if (isHoverAnimationEnabled) {
-            document.querySelectorAll('.service-card, .portfolio-item, .skill-card, .testimonial-card').forEach(card => {
+            document.querySelectorAll('.service-catalog-item, .portfolio-item, .skill-card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-10px) scale(1.02)';
                 });
@@ -2664,87 +2637,9 @@
         }, observerOptions);
 
         // Observe all sections and cards
-        document.querySelectorAll('section, .service-card, .portfolio-item, .skill-card, .testimonial-card').forEach(section => {
+        document.querySelectorAll('section, .service-catalog-item, .portfolio-item, .skill-card').forEach(section => {
             observer.observe(section);
         });
-
-        // Particle effect system (only for desktop)
-        class ParticleSystem {
-            constructor(container) {
-                this.container = container;
-                this.particles = [];
-                this.isActive = true;
-            }
-            
-            createParticle() {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: absolute;
-                    width: ${Math.random() * 4 + 1}px;
-                    height: ${Math.random() * 4 + 1}px;
-                    background: rgba(255,255,255,${Math.random() * 0.5 + 0.1});
-                    border-radius: 50%;
-                    pointer-events: none;
-                    left: ${Math.random() * 100}%;
-                    top: 100%;
-                    animation: floatUp ${Math.random() * 10 + 5}s linear infinite;
-                    animation-delay: ${Math.random() * 2}s;
-                `;
-                
-                this.container.appendChild(particle);
-                this.particles.push(particle);
-                
-                // Remove particle after animation
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                    this.particles = this.particles.filter(p => p !== particle);
-                }, 15000);
-            }
-            
-            start() {
-                if (this.isActive) {
-                    this.createParticle();
-                    setTimeout(() => this.start(), Math.random() * 2000 + 1000);
-                }
-            }
-            
-            stop() {
-                this.isActive = false;
-            }
-        }
-
-        // Add CSS for particle animation
-        const particleStyle = document.createElement('style');
-        particleStyle.textContent = `
-            @keyframes floatUp {
-                0% {
-                    transform: translateY(0) rotate(0deg);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 1;
-                }
-                90% {
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-100vh) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(particleStyle);
-
-        // Initialize particle system for hero section (only on desktop)
-        setTimeout(() => {
-            const hero = document.querySelector('.hero');
-            if (hero && !('ontouchstart' in window) && window.innerWidth > 768) {
-                const particleSystem = new ParticleSystem(hero);
-                particleSystem.start();
-            }
-        }, 3000);
 
         // Enhanced pulse animation for CTA buttons
         setInterval(() => {
@@ -2757,38 +2652,6 @@
                 }
             });
         }, 8000);
-
-        // Testimonials carousel/slider functionality for mobile
-        let currentTestimonial = 0;
-        const testimonials = document.querySelectorAll('.testimonial-card');
-        
-        function showTestimonials() {
-            if (window.innerWidth <= 768) { // Mobile view
-                testimonials.forEach((testimonial, index) => {
-                    testimonial.style.display = index === currentTestimonial ? 'block' : 'none';
-                });
-                
-                // Auto-advance testimonials on mobile
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                setTimeout(showTestimonials, 5000);
-            }
-        }
-
-        // Initialize testimonial slider for mobile
-        if (window.innerWidth <= 768) {
-            showTestimonials();
-        }
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                testimonials.forEach(testimonial => {
-                    testimonial.style.display = 'block';
-                });
-            } else {
-                showTestimonials();
-            }
-        });
 
         // Keyboard navigation support
         document.addEventListener('keydown', function(e) {
@@ -2813,7 +2676,8 @@
         ║   💻 github.com/josemarioarias12     ║
         ║                                      ║
         ║   🚀 Portfolio v2.0 Enhanced         ║
-        ║   ✨ Fixed Header & Footer           ║
+        ║   ✨ Services Catalog Added          ║
+        ║   🎨 Interactive Developer Animation  ║
         ╚══════════════════════════════════════╝
         `, 
         'color: #274C77; font-family: monospace; font-size: 12px; font-weight: bold;'
@@ -2843,9 +2707,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
