@@ -2391,8 +2391,8 @@ document.getElementById('contact-form').addEventListener('submit', async functio
             to_email: 'josemarioarias12@gmail.com'
         };
         
-        // ENVÍO REAL CON EMAILJS - YA NO ESTÁ COMENTADO
-        await emailjs.send('service_oiqfl3m', 'template_6mgow2e', templateParams);
+        // ENVÍO REAL CON EMAILJS
+        await emailjs.send('service_oiqfl3m', 'template_t1910zg', templateParams);
         
         showFormStatus('success', currentLanguage === 'es' ? '¡Mensaje enviado exitosamente! Te contactaré pronto.' : 'Message sent successfully! I\'ll contact you soon.');
         this.reset();
@@ -2651,6 +2651,7 @@ if (typeof webVitals !== 'undefined') {
     </script>
 </body>
 </html>
+
 
 
 
