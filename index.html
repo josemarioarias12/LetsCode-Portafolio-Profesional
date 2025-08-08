@@ -421,40 +421,10 @@
             position: relative;
         }
 
-       .typewriter {
-  display: inline-block;          /* Para que tome solo el ancho del contenido */
-  font-family: monospace;
-  color: white;
-  border-right: 3px solid var(--accent-color);
-  white-space: nowrap;            /* Para que cada línea se anime por separado */
-  overflow: hidden;
-  animation: typing 3s steps(15, end), blink 1s step-end infinite;
-}
-
-.typewriter br {
-  display: block;                 /* Hace que <br> cree salto visible */
-  content: "";                   /* No es obligatorio, pero limpia */
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-}
-
-/* Para animar la escritura de las dos líneas, hacemos que el contenedor sea un bloque y animamos el ancho de cada línea */
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink {
-  0%, 50% {
-    border-color: var(--accent-color);
-  }
-  50.01%, 100% {
-    border-color: transparent;
-  }
-}
-
+         .typewriter {
+    border-right: 3px solid var(--accent-color);
+    animation: blink 1s infinite;
+        }
 
 
         .hero-content .subtitle {
@@ -1643,7 +1613,7 @@
             <section class="hero" id="home" role="banner">
                 <div class="hero-container">
                     <div class="hero-content" data-aos="fade-right">
-                       <h1 class="typewriter" data-en="Full Stack Developer" data-es="Desarrollador Full Stack">Desarrollador<br>Full Stack </h1>
+                       <h1 class="typewriter" data-en="Full Stack Developer" data-es="Desarrollador Full Stack">Desarrollador Full Stack </h1>
 
 
                         <p class="subtitle" data-en="Digital Solutions Creator" data-es="Creador de Soluciones Digitales">Creador de Soluciones Digitales</p>
@@ -2693,6 +2663,7 @@ if (typeof webVitals !== 'undefined') {
     </script>
 </body>
 </html>
+
 
 
 
