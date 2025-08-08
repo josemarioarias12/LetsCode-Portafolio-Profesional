@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+   
     <!-- SEO Optimization -->
     <title>LetsCode</title>
     <meta name="description" content="Desarrollador Full Stack freelance especializado en React, Node.js, y desarrollo móvil. Creo soluciones digitales innovadoras para empresas en Costa Rica y Latinoamérica.">
@@ -11,21 +11,21 @@
     <meta name="author" content="José Mario Arias">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://josemarioarias.dev">
-    
+   
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://josemarioarias.dev">
     <meta property="og:title" content="José Mario Arias - Desarrollador Full Stack Freelance">
     <meta property="og:description" content="Especialista en desarrollo web y móvil. Creando soluciones digitales innovadoras con tecnologías modernas.">
     <meta property="og:image" content="https://josemarioarias.dev/og-image.jpg">
-    
+   
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://josemarioarias.dev">
     <meta property="twitter:title" content="José Mario Arias - Desarrollador Full Stack">
     <meta property="twitter:description" content="Desarrollador freelance especializado en React, Node.js y desarrollo móvil">
     <meta property="twitter:image" content="https://josemarioarias.dev/twitter-image.jpg">
-    
+   
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -47,25 +47,25 @@
       ]
     }
     </script>
-    
+   
     <link rel="icon" type="image/png" sizes="512x512" href="FaviconLCTransparenteG.png">
-    
+   
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    
+   
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    
+   
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+   
     <!-- AOS Animation -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    
+   
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
+   
     <style>
         :root {
             --primary-color: #274C77;
@@ -201,17 +201,17 @@
         }
 
         @keyframes techIconFloat {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg); 
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
             }
-            25% { 
-                transform: translateY(-10px) rotate(5deg); 
+            25% {
+                transform: translateY(-10px) rotate(5deg);
             }
-            50% { 
-                transform: translateY(-5px) rotate(-5deg); 
+            50% {
+                transform: translateY(-5px) rotate(-5deg);
             }
-            75% { 
-                transform: translateY(-15px) rotate(3deg); 
+            75% {
+                transform: translateY(-15px) rotate(3deg);
             }
         }
 
@@ -300,7 +300,7 @@
         .logo-text {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 1.6rem; 
+            font-size: 1.6rem;
             margin-left: 0.5rem;
             background: linear-gradient(45deg, #ffffff, #A3B4C4);
             -webkit-background-clip: text;
@@ -982,25 +982,20 @@
 
         /* Contact Section */
         .contact {
-    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFB366 100%);
-    color: var(--text-light);
-    position: relative;
-    overflow: hidden;
-}
+            background: var(--primary-color);
+            color: var(--text-light);
+            position: relative;
+        }
 
-       .contact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
-    opacity: 0.7;
-}
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(247,108,94,0.1) 50%, transparent 70%);
+        }
 
         .contact-content {
             display: grid;
@@ -1032,15 +1027,15 @@
         }
 
         .contact-item i {
-    font-size: 1.8rem;
-    color: var(--text-light);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            width: 30px;
+            transition: transform 0.3s ease;
+        }
 
         .contact-item:hover i {
-    transform: scale(1.3) rotate(5deg);
-    color: #FFF8DC;
-}
+            transform: scale(1.2);
+        }
 
         .contact-form {
             background: rgba(255,255,255,0.1);
@@ -1515,7 +1510,7 @@
                 --shadow: 0 2px 10px rgba(0,0,0,0.3);
                 --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
             }
-            
+           
             .btn {
                 border: 2px solid currentColor;
             }
@@ -1673,7 +1668,7 @@
                             <p data-en="I'm a freelance developer passionate about creating innovative digital solutions. With expertise in modern web technologies, I help businesses and individuals bring their ideas to life through clean, efficient, and user-friendly applications." data-es="Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.">
                                 Soy un desarrollador freelance apasionado por crear soluciones digitales innovadoras. Con experiencia en tecnologías web modernas, ayudo a empresas e individuos a dar vida a sus ideas a través de aplicaciones limpias, eficientes y fáciles de usar.
                             </p>
-                            
+                           
                             <div class="skills-grid">
                                 <div class="skill-card interactive-bg" data-aos="fade-up" data-aos-delay="100">
                                     <i class="fab fa-html5" aria-hidden="true"></i>
@@ -1825,7 +1820,7 @@
                             Proyectos destacados que muestran mis habilidades y creatividad
                         </p>
                     </div>
-                    
+                   
                     <div class="portfolio-filter" data-aos="fade-up" role="group" aria-label="Portfolio filter">
                         <button class="filter-btn active" data-filter="all" data-en="All Projects" data-es="Todos">Todos</button>
                         <button class="filter-btn" data-filter="web" data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</button>
@@ -1923,11 +1918,11 @@
                             ¿Listo para comenzar tu próximo proyecto? ¡Trabajemos juntos!
                         </p>
                     </div>
-                    
+                   
                     <div class="contact-content">
                         <div class="contact-info" data-aos="fade-right">
                             <h3 data-en="Contact Information" data-es="Información de Contacto">Información de Contacto</h3>
-                            
+                           
                             <div class="contact-item">
                                 <i class="fas fa-envelope" aria-hidden="true"></i>
                                 <div>
@@ -1935,7 +1930,7 @@
                                     <p>josemarioarias12@gmail.com</p>
                                 </div>
                             </div>
-                            
+                           
                             <div class="contact-item">
                                 <i class="fas fa-phone" aria-hidden="true"></i>
                                 <div>
@@ -1943,7 +1938,7 @@
                                     <p>+506 6218-5607</p>
                                 </div>
                             </div>
-                            
+                           
                             <div class="contact-item">
                                 <i class="fab fa-github" aria-hidden="true"></i>
                                 <div>
@@ -1951,7 +1946,7 @@
                                     <p>github.com/josemarioarias12</p>
                                 </div>
                             </div>
-                            
+                           
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                 <div>
@@ -1968,51 +1963,51 @@
                                 </div>
                             </div>
                         </div>
-                        
+                       
                         <div class="contact-form" data-aos="fade-left">
                             <h3 data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</h3>
-                            
+                           
                             <div class="form-status" id="form-status"></div>
-                            
+                           
                             <form id="contact-form" novalidate>
                                 <div class="form-group">
                                     <label for="name" data-en="Name *" data-es="Nombre *">Nombre *</label>
-                                    <input type="text" id="name" name="name" required 
+                                    <input type="text" id="name" name="name" required
                                            placeholder="Tu nombre completo"
                                            data-placeholder-en="Your full name"
                                            data-placeholder-es="Tu nombre completo"
                                            aria-describedby="name-error">
                                     <span class="error-message" id="name-error"></span>
                                 </div>
-                                
+                               
                                 <div class="form-group">
                                     <label for="email" data-en="Email *" data-es="Correo *">Correo *</label>
-                                    <input type="email" id="email" name="email" required 
+                                    <input type="email" id="email" name="email" required
                                            placeholder="tu@email.com"
                                            aria-describedby="email-error">
                                     <span class="error-message" id="email-error"></span>
                                 </div>
-                                
+                               
                                 <div class="form-group">
                                     <label for="subject" data-en="Subject *" data-es="Asunto *">Asunto *</label>
-                                    <input type="text" id="subject" name="subject" required 
+                                    <input type="text" id="subject" name="subject" required
                                            placeholder="Asunto del mensaje"
                                            data-placeholder-en="Message subject"
                                            data-placeholder-es="Asunto del mensaje"
                                            aria-describedby="subject-error">
                                     <span class="error-message" id="subject-error"></span>
                                 </div>
-                                
+                               
                                 <div class="form-group">
                                     <label for="message" data-en="Message *" data-es="Mensaje *">Mensaje *</label>
-                                    <textarea id="message" name="message" rows="5" required 
+                                    <textarea id="message" name="message" rows="5" required
                                               placeholder="Cuéntame sobre tu proyecto..."
                                               data-placeholder-en="Tell me about your project..."
                                               data-placeholder-es="Cuéntame sobre tu proyecto..."
                                               aria-describedby="message-error"></textarea>
                                     <span class="error-message" id="message-error"></span>
                                 </div>
-                                
+                               
                                 <button type="submit" class="btn btn-primary" id="submit-btn">
                                     <i class="fas fa-paper-plane" aria-hidden="true"></i>
                                     <span data-en="Send Message" data-es="Enviar Mensaje">Enviar Mensaje</span>
@@ -2035,7 +2030,7 @@
                         <p><a href="#services" data-en="Services" data-es="Servicios">Servicios</a></p>
                         <p><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portafolio</a></p>
                     </div>
-                    
+                   
                     <div class="footer-section">
                         <h4 data-en="Services" data-es="Servicios">Servicios</h4>
                         <p data-en="Web Development" data-es="Desarrollo Web">Desarrollo Web</p>
@@ -2043,7 +2038,7 @@
                         <p>UI/UX Design</p>
                         <p data-en="E-commerce" data-es="E-commerce">E-commerce</p>
                     </div>
-                    
+                   
                     <div class="footer-section">
                         <h4 data-en="Technologies" data-es="Tecnologías">Tecnologías</h4>
                         <p>React & Vue.js</p>
@@ -2051,7 +2046,7 @@
                         <p>React Native & Flutter</p>
                         <p>MongoDB & PostgreSQL</p>
                     </div>
-                    
+                   
                     <div class="footer-section">
                         <h4 data-en="Contact" data-es="Contacto">Contacto</h4>
                         <p>josemarioarias12@gmail.com</p>
@@ -2059,7 +2054,7 @@
                         <p data-en="San José, Costa Rica" data-es="San José, Costa Rica">San José, Costa Rica</p>
                     </div>
                 </div>
-                
+               
                 <div class="social-links">
                     <a href="https://github.com/josemarioarias12" target="_blank" aria-label="GitHub profile">
                         <i class="fab fa-github" aria-hidden="true"></i>
@@ -2077,7 +2072,7 @@
                         <i class="fab fa-whatsapp" aria-hidden="true"></i>
                     </a>
                 </div>
-                
+               
                 <p>&copy; 2025 LetsCode. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">Todos los derechos reservados.</span></p>
             </div>
         </footer>
@@ -2115,7 +2110,7 @@ function updateFPS() {
         fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
         frameCount = 0;
         lastTime = currentTime;
-        
+       
         const fpsCounter = document.getElementById('fps-counter');
         if (fpsCounter) {
             fpsCounter.textContent = `FPS: ${fps}`;
@@ -2136,18 +2131,18 @@ AOS.init({
 window.addEventListener('load', function() {
     const loadTime = performance.now() - startTime;
     const loading = document.getElementById('loading');
-    
+   
     // Update load time indicator
     const loadTimeElement = document.getElementById('load-time');
     if (loadTimeElement) {
         loadTimeElement.textContent = `Load: ${Math.round(loadTime)}ms`;
     }
-    
+   
     setTimeout(() => {
         loading.classList.add('hide');
         // Start performance monitoring
         updateFPS();
-        
+       
         // Show performance indicator briefly
         const perfIndicator = document.getElementById('performance-indicator');
         if (perfIndicator) {
@@ -2167,7 +2162,7 @@ function updateNavbar() {
     const navbar = document.getElementById('navbar');
     const scrollTop = document.getElementById('scroll-top');
     const currentScrollY = window.scrollY;
-    
+   
     // Add scrolled class for styling
     if (currentScrollY > 50) {
         navbar.classList.add('scrolled');
@@ -2176,10 +2171,10 @@ function updateNavbar() {
         navbar.classList.remove('scrolled');
         scrollTop.classList.remove('show');
     }
-    
+   
     // Keep navbar always visible (remove hide on scroll behavior for better UX)
     navbar.style.transform = 'translateY(0)';
-    
+   
     lastScrollY = currentScrollY;
     ticking = false;
 }
@@ -2200,9 +2195,9 @@ const navMenu = document.getElementById('nav-menu');
 mobileMenuBtn.addEventListener('click', function() {
     const isActive = navMenu.classList.toggle('active');
     const icon = this.querySelector('i');
-    
+   
     this.setAttribute('aria-expanded', isActive);
-    
+   
     if (isActive) {
         icon.classList.replace('fa-bars', 'fa-times');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -2238,11 +2233,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const target = document.querySelector(targetId);
-        
+       
         if (target) {
             const navbarHeight = document.querySelector('.navbar').offsetHeight;
             const offsetTop = target.offsetTop - navbarHeight - 20; // Extra padding
-            
+           
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -2275,13 +2270,13 @@ filterBtns.forEach(btn => {
         // Animate out items that don't match
         portfolioItems.forEach((item, index) => {
             const shouldShow = filter === 'all' || item.getAttribute('data-category') === filter;
-            
+           
             if (shouldShow) {
                 setTimeout(() => {
                     item.style.display = 'block';
                     item.style.opacity = '0';
                     item.style.transform = 'translateY(20px)';
-                    
+                   
                     setTimeout(() => {
                         item.style.opacity = '1';
                         item.style.transform = 'translateY(0)';
@@ -2310,14 +2305,14 @@ function validateForm() {
     const email = document.getElementById('email').value.trim();
     const subject = document.getElementById('subject').value.trim();
     const message = document.getElementById('message').value.trim();
-    
+   
     let isValid = true;
-    
+   
     // Clear previous errors
     document.querySelectorAll('.error-message').forEach(error => {
         error.textContent = '';
     });
-    
+   
     // Validate name
     if (!name) {
         document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre es requerido' : 'Name is required';
@@ -2326,7 +2321,7 @@ function validateForm() {
         document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre debe tener al menos 2 caracteres' : 'Name must be at least 2 characters';
         isValid = false;
     }
-    
+   
     // Validate email
     if (!email) {
         document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'El email es requerido' : 'Email is required';
@@ -2335,13 +2330,13 @@ function validateForm() {
         document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'Email inválido' : 'Invalid email';
         isValid = false;
     }
-    
+   
     // Validate subject
     if (!subject) {
         document.getElementById('subject-error').textContent = currentLanguage === 'es' ? 'El asunto es requerido' : 'Subject is required';
         isValid = false;
     }
-    
+   
     // Validate message
     if (!message) {
         document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje es requerido' : 'Message is required';
@@ -2350,7 +2345,7 @@ function validateForm() {
         document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje debe tener al menos 10 caracteres' : 'Message must be at least 10 characters';
         isValid = false;
     }
-    
+   
     return isValid;
 }
 
@@ -2359,7 +2354,7 @@ function showFormStatus(type, message) {
     formStatus.className = `form-status ${type}`;
     formStatus.textContent = message;
     formStatus.style.display = 'block';
-    
+   
     setTimeout(() => {
         formStatus.style.display = 'none';
     }, 5000);
@@ -2368,22 +2363,22 @@ function showFormStatus(type, message) {
 // FORMULARIO DE CONTACTO CORREGIDO - ESTA ES LA PARTE PRINCIPAL QUE NECESITABAS
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
+   
     if (isFormSubmitting) return;
-    
+   
     if (!validateForm()) {
         showFormStatus('error', currentLanguage === 'es' ? 'Por favor corrige los errores en el formulario' : 'Please fix the errors in the form');
         return;
     }
-    
+   
     isFormSubmitting = true;
     const submitBtn = document.getElementById('submit-btn');
     const originalText = submitBtn.innerHTML;
-    
+   
     // Show loading state
     submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${currentLanguage === 'es' ? 'Enviando...' : 'Sending...'}`;
     submitBtn.disabled = true;
-    
+   
     try {
         // Get form data
         const formData = new FormData(this);
@@ -2395,13 +2390,13 @@ document.getElementById('contact-form').addEventListener('submit', async functio
             to_name: 'José Mario Arias',
             to_email: 'josemarioarias12@gmail.com'
         };
-        
+       
         // ENVÍO REAL CON EMAILJS
         await emailjs.send('service_oiqfl3m', 'template_t1910zg', templateParams);
-        
+       
         showFormStatus('success', currentLanguage === 'es' ? '¡Mensaje enviado exitosamente! Te contactaré pronto.' : 'Message sent successfully! I\'ll contact you soon.');
         this.reset();
-        
+       
         // Track form submission (Google Analytics example)
         if (typeof gtag !== 'undefined') {
             gtag('event', 'form_submit', {
@@ -2409,7 +2404,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
                 'event_label': 'contact_form'
             });
         }
-        
+       
     } catch (error) {
         console.error('Error sending email:', error);
         console.error('Error details:', error.text || error.message);
@@ -2442,9 +2437,9 @@ function downloadCV() {
             'event_label': 'cv_download'
         });
     }
-    
+   
     const link = document.createElement('a');
-    link.href = 'PLANTILLA CV Portafolio Profesional.pdf'; 
+    link.href = 'PLANTILLA CV Portafolio Profesional.pdf';
     link.download = 'Jose_Mario_Arias_CV.pdf';
     link.click();
 }
@@ -2454,7 +2449,7 @@ function toggleLanguage() {
     currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
     const langBtn = document.getElementById('lang-btn');
     langBtn.textContent = currentLanguage === 'es' ? 'EN' : 'ES';
-    
+   
     // Update all elements with language attributes
     document.querySelectorAll('[data-en]').forEach(element => {
         const text = element.getAttribute(`data-${currentLanguage}`);
@@ -2466,7 +2461,7 @@ function toggleLanguage() {
             }
         }
     });
-    
+   
     // Update placeholders specifically
     document.querySelectorAll('[data-placeholder-en]').forEach(element => {
         const placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
@@ -2474,10 +2469,10 @@ function toggleLanguage() {
             element.placeholder = placeholder;
         }
     });
-    
+   
     // Update HTML lang attribute for accessibility
     document.documentElement.lang = currentLanguage;
-    
+   
     // Store language preference
     localStorage.setItem('preferred-language', currentLanguage);
 }
@@ -2494,7 +2489,7 @@ function typeWriter(element, text, speed = 100) {
         let i = 0;
         element.innerHTML = '';
         element.style.borderRight = '3px solid var(--accent-color)';
-        
+       
         function type() {
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
@@ -2536,7 +2531,7 @@ if (isHoverAnimationEnabled) {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         });
-        
+       
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
@@ -2554,7 +2549,7 @@ const observer = new IntersectionObserver(function(entries) {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
-            
+           
             // Trigger counter animations if needed
             if (entry.target.classList.contains('counter')) {
                 animateCounter(entry.target);
@@ -2601,7 +2596,7 @@ function testEmailJSConfiguration() {
         to_name: 'José Mario Arias',
         to_email: 'josemarioarias12@gmail.com'
     };
-    
+   
     console.log('Enviando email de prueba...');
     emailjs.send('service_oiqfl3m', 'template_6mgow2e', testParams)
         .then(function(response) {
@@ -2628,7 +2623,7 @@ console.log(`
 ║   ✨ EmailJS CORREGIDO               ║
 ║   🎨 Interactive Developer Animation  ║
 ╚══════════════════════════════════════╝
-`, 
+`,
 'color: #274C77; font-family: monospace; font-size: 12px; font-weight: bold;'
 );
 
@@ -2656,14 +2651,3 @@ if (typeof webVitals !== 'undefined') {
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
