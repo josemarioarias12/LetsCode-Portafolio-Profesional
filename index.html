@@ -2091,545 +2091,567 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         // Global Variables
-        let currentLanguage = 'es';
-        let isFormSubmitting = false;
-        const startTime = performance.now();
-        
-        // Initialize EmailJS
-        emailjs.init("wUtuIQDSHO_EtG51t"); // Replace with your EmailJS public key
-        
-        // Performance monitoring
-        let fps = 0;
-        let frameCount = 0;
-        let lastTime = performance.now();
-        
-        function updateFPS() {
-            frameCount++;
-            const currentTime = performance.now();
-            if (currentTime >= lastTime + 1000) {
-                fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-                frameCount = 0;
-                lastTime = currentTime;
-                
-                const fpsCounter = document.getElementById('fps-counter');
-                if (fpsCounter) {
-                    fpsCounter.textContent = `FPS: ${fps}`;
-                }
-            }
-            requestAnimationFrame(updateFPS);
-        }
-        
-        // Initialize AOS with enhanced settings
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100,
-            easing: 'ease-out-cubic'
-        });
+let currentLanguage = 'es';
+let isFormSubmitting = false;
+const startTime = performance.now();
 
-        // Loading Animation
-        window.addEventListener('load', function() {
-            const loadTime = performance.now() - startTime;
-            const loading = document.getElementById('loading');
-            
-            // Update load time indicator
-            const loadTimeElement = document.getElementById('load-time');
-            if (loadTimeElement) {
-                loadTimeElement.textContent = `Load: ${Math.round(loadTime)}ms`;
-            }
-            
+// Initialize EmailJS - CONFIGURACIÓN CORREGIDA
+emailjs.init("wUtuIQDSHO_EtG51t"); // Tu Public Key
+
+// Performance monitoring
+let fps = 0;
+let frameCount = 0;
+let lastTime = performance.now();
+
+function updateFPS() {
+    frameCount++;
+    const currentTime = performance.now();
+    if (currentTime >= lastTime + 1000) {
+        fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+        frameCount = 0;
+        lastTime = currentTime;
+        
+        const fpsCounter = document.getElementById('fps-counter');
+        if (fpsCounter) {
+            fpsCounter.textContent = `FPS: ${fps}`;
+        }
+    }
+    requestAnimationFrame(updateFPS);
+}
+
+// Initialize AOS with enhanced settings
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100,
+    easing: 'ease-out-cubic'
+});
+
+// Loading Animation
+window.addEventListener('load', function() {
+    const loadTime = performance.now() - startTime;
+    const loading = document.getElementById('loading');
+    
+    // Update load time indicator
+    const loadTimeElement = document.getElementById('load-time');
+    if (loadTimeElement) {
+        loadTimeElement.textContent = `Load: ${Math.round(loadTime)}ms`;
+    }
+    
+    setTimeout(() => {
+        loading.classList.add('hide');
+        // Start performance monitoring
+        updateFPS();
+        
+        // Show performance indicator briefly
+        const perfIndicator = document.getElementById('performance-indicator');
+        if (perfIndicator) {
+            perfIndicator.classList.add('show');
             setTimeout(() => {
-                loading.classList.add('hide');
-                // Start performance monitoring
-                updateFPS();
-                
-                // Show performance indicator briefly
-                const perfIndicator = document.getElementById('performance-indicator');
-                if (perfIndicator) {
-                    perfIndicator.classList.add('show');
-                    setTimeout(() => {
-                        perfIndicator.classList.remove('show');
-                    }, 3000);
-                }
-            }, Math.max(1000, Math.min(loadTime, 2000)));
-        });
-
-        // Enhanced Navbar Scroll Effect - IMPROVED FOR FIXED HEADER
-        let lastScrollY = window.scrollY;
-        let ticking = false;
-
-        function updateNavbar() {
-            const navbar = document.getElementById('navbar');
-            const scrollTop = document.getElementById('scroll-top');
-            const currentScrollY = window.scrollY;
-            
-            // Add scrolled class for styling
-            if (currentScrollY > 50) {
-                navbar.classList.add('scrolled');
-                scrollTop.classList.add('show');
-            } else {
-                navbar.classList.remove('scrolled');
-                scrollTop.classList.remove('show');
-            }
-            
-            // Keep navbar always visible (remove hide on scroll behavior for better UX)
-            navbar.style.transform = 'translateY(0)';
-            
-            lastScrollY = currentScrollY;
-            ticking = false;
+                perfIndicator.classList.remove('show');
+            }, 3000);
         }
+    }, Math.max(1000, Math.min(loadTime, 2000)));
+});
 
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(updateNavbar);
-                ticking = true;
-            }
-        }
+// Enhanced Navbar Scroll Effect - IMPROVED FOR FIXED HEADER
+let lastScrollY = window.scrollY;
+let ticking = false;
 
-        window.addEventListener('scroll', requestTick);
+function updateNavbar() {
+    const navbar = document.getElementById('navbar');
+    const scrollTop = document.getElementById('scroll-top');
+    const currentScrollY = window.scrollY;
+    
+    // Add scrolled class for styling
+    if (currentScrollY > 50) {
+        navbar.classList.add('scrolled');
+        scrollTop.classList.add('show');
+    } else {
+        navbar.classList.remove('scrolled');
+        scrollTop.classList.remove('show');
+    }
+    
+    // Keep navbar always visible (remove hide on scroll behavior for better UX)
+    navbar.style.transform = 'translateY(0)';
+    
+    lastScrollY = currentScrollY;
+    ticking = false;
+}
 
-        // Enhanced Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const navMenu = document.getElementById('nav-menu');
+function requestTick() {
+    if (!ticking) {
+        requestAnimationFrame(updateNavbar);
+        ticking = true;
+    }
+}
+
+window.addEventListener('scroll', requestTick);
+
+// Enhanced Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navMenu = document.getElementById('nav-menu');
+
+mobileMenuBtn.addEventListener('click', function() {
+    const isActive = navMenu.classList.toggle('active');
+    const icon = this.querySelector('i');
+    
+    this.setAttribute('aria-expanded', isActive);
+    
+    if (isActive) {
+        icon.classList.replace('fa-bars', 'fa-times');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+        document.body.style.overflow = '';
+    }
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(e) {
+    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    });
+});
+
+// Enhanced Smooth Scrolling with offset for fixed navbar
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
         
-        mobileMenuBtn.addEventListener('click', function() {
-            const isActive = navMenu.classList.toggle('active');
-            const icon = this.querySelector('i');
+        if (target) {
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const offsetTop = target.offsetTop - navbarHeight - 20; // Extra padding
             
-            this.setAttribute('aria-expanded', isActive);
-            
-            if (isActive) {
-                icon.classList.replace('fa-bars', 'fa-times');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Enhanced Smooth Scrolling with offset for fixed navbar
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-                
-                if (target) {
-                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                    const offsetTop = target.offsetTop - navbarHeight - 20; // Extra padding
-                    
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Scroll to Top with smooth animation
-        document.getElementById('scroll-top').addEventListener('click', function() {
             window.scrollTo({
-                top: 0,
+                top: offsetTop,
                 behavior: 'smooth'
             });
-        });
+        }
+    });
+});
 
-        // Enhanced Portfolio Filter with animations
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
+// Scroll to Top with smooth animation
+document.getElementById('scroll-top').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
+// Enhanced Portfolio Filter with animations
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-                const filter = this.getAttribute('data-filter');
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
 
-                // Animate out items that don't match
-                portfolioItems.forEach((item, index) => {
-                    const shouldShow = filter === 'all' || item.getAttribute('data-category') === filter;
+        const filter = this.getAttribute('data-filter');
+
+        // Animate out items that don't match
+        portfolioItems.forEach((item, index) => {
+            const shouldShow = filter === 'all' || item.getAttribute('data-category') === filter;
+            
+            if (shouldShow) {
+                setTimeout(() => {
+                    item.style.display = 'block';
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
                     
-                    if (shouldShow) {
-                        setTimeout(() => {
-                            item.style.display = 'block';
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateY(20px)';
-                            
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'translateY(0)';
-                                item.style.transition = 'all 0.3s ease';
-                            }, 50);
-                        }, index * 100);
-                    } else {
-                        item.style.opacity = '0';
-                        item.style.transform = 'translateY(-20px)';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        });
-
-        // Form validation functions
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function validateForm() {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            let isValid = true;
-            
-            // Clear previous errors
-            document.querySelectorAll('.error-message').forEach(error => {
-                error.textContent = '';
-            });
-            
-            // Validate name
-            if (!name) {
-                document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre es requerido' : 'Name is required';
-                isValid = false;
-            } else if (name.length < 2) {
-                document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre debe tener al menos 2 caracteres' : 'Name must be at least 2 characters';
-                isValid = false;
-            }
-            
-            // Validate email
-            if (!email) {
-                document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'El email es requerido' : 'Email is required';
-                isValid = false;
-            } else if (!validateEmail(email)) {
-                document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'Email inválido' : 'Invalid email';
-                isValid = false;
-            }
-            
-            // Validate subject
-            if (!subject) {
-                document.getElementById('subject-error').textContent = currentLanguage === 'es' ? 'El asunto es requerido' : 'Subject is required';
-                isValid = false;
-            }
-            
-            // Validate message
-            if (!message) {
-                document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje es requerido' : 'Message is required';
-                isValid = false;
-            } else if (message.length < 10) {
-                document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje debe tener al menos 10 caracteres' : 'Message must be at least 10 characters';
-                isValid = false;
-            }
-            
-            return isValid;
-        }
-
-        function showFormStatus(type, message) {
-            const formStatus = document.getElementById('form-status');
-            formStatus.className = `form-status ${type}`;
-            formStatus.textContent = message;
-            formStatus.style.display = 'block';
-            
-            setTimeout(() => {
-                formStatus.style.display = 'none';
-            }, 5000);
-        }
-
-        // Enhanced Contact Form with EmailJS integration
-        document.getElementById('contact-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            if (isFormSubmitting) return;
-            
-            if (!validateForm()) {
-                showFormStatus('error', currentLanguage === 'es' ? 'Por favor corrige los errores en el formulario' : 'Please fix the errors in the form');
-                return;
-            }
-            
-            isFormSubmitting = true;
-            const submitBtn = document.getElementById('submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            // Show loading state
-            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${currentLanguage === 'es' ? 'Enviando...' : 'Sending...'}`;
-            submitBtn.disabled = true;
-            
-            try {
-                // Get form data
-                const formData = new FormData(this);
-                const templateParams = {
-                    from_name: formData.get('name'),
-                    from_email: formData.get('email'),
-                    subject: formData.get('subject'),
-                    message: formData.get('message'),
-                    to_name: 'José Mario Arias'
-                };
-                
-                // Try to send with EmailJS (replace with your service ID and template ID)
-                // await emailjs.send('service_oiqfl3m', 'template_6mgow2e', templateParams);
-                
-                // For demo purposes, simulate successful submission
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                showFormStatus('success', currentLanguage === 'es' ? '¡Mensaje enviado exitosamente! Te contactaré pronto.' : 'Message sent successfully! I\'ll contact you soon.');
-                this.reset();
-                
-                // Track form submission (Google Analytics example)
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submit', {
-                        'event_category': 'engagement',
-                        'event_label': 'contact_form'
-                    });
-                }
-                
-            } catch (error) {
-                console.error('Error sending email:', error);
-                showFormStatus('error', currentLanguage === 'es' ? 'Error al enviar el mensaje. Por favor intenta de nuevo o contacta directamente por WhatsApp.' : 'Error sending message. Please try again or contact directly via WhatsApp.');
-            } finally {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                isFormSubmitting = false;
-            }
-        });
-
-        // Real-time form validation
-        document.querySelectorAll('#contact-form input, #contact-form textarea').forEach(field => {
-            field.addEventListener('blur', validateForm);
-            field.addEventListener('input', function() {
-                // Clear error message when user starts typing
-                const errorElement = document.getElementById(this.name + '-error');
-                if (errorElement) {
-                    errorElement.textContent = '';
-                }
-            });
-        });
-
-        // Download CV Function with analytics
-        function downloadCV() {
-            // Track download event
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'file_download', {
-                    'event_category': 'engagement',
-                    'event_label': 'cv_download'
-                });
-            }
-            
-            const link = document.createElement('a');
-            link.href = 'PLANTILLA CV Portafolio Profesional.pdf'; 
-            link.download = 'Jose_Mario_Arias_CV.pdf';
-            link.click();
-        }
-
-        // Enhanced Language Toggle Function
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
-            const langBtn = document.getElementById('lang-btn');
-            langBtn.textContent = currentLanguage === 'es' ? 'EN' : 'ES';
-            
-            // Update all elements with language attributes
-            document.querySelectorAll('[data-en]').forEach(element => {
-                const text = element.getAttribute(`data-${currentLanguage}`);
-                if (text) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = text;
-                    } else {
-                        element.textContent = text;
-                    }
-                }
-            });
-            
-            // Update placeholders specifically
-            document.querySelectorAll('[data-placeholder-en]').forEach(element => {
-                const placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
-                if (placeholder) {
-                    element.placeholder = placeholder;
-                }
-            });
-            
-            // Update HTML lang attribute for accessibility
-            document.documentElement.lang = currentLanguage;
-            
-            // Store language preference
-            localStorage.setItem('preferred-language', currentLanguage);
-        }
-
-        // Load saved language preference
-        const savedLanguage = localStorage.getItem('preferred-language');
-        if (savedLanguage && savedLanguage !== currentLanguage) {
-            toggleLanguage();
-        }
-
-        // Enhanced Typing Animation for Hero
-        function typeWriter(element, text, speed = 100) {
-            return new Promise((resolve) => {
-                let i = 0;
-                element.innerHTML = '';
-                element.style.borderRight = '3px solid var(--accent-color)';
-                
-                function type() {
-                    if (i < text.length) {
-                        element.innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(type, speed);
-                    } else {
-                        // Add blinking cursor animation
-                        setTimeout(() => {
-                            element.classList.add('typewriter');
-                            resolve();
-                        }, 500);
-                    }
-                }
-                type();
-            });
-        }
-
-        // Initialize typing animation when page loads
-        window.addEventListener('load', function() {
-            setTimeout(async () => {
-                const heroTitle = document.querySelector('.hero-content h1');
-                if (heroTitle) {
-                    const originalText = heroTitle.textContent;
-                    await typeWriter(heroTitle, originalText, 80);
-                }
-            }, 1500);
-        });
-
-        // Enhanced hover effects with performance optimization
-        let isHoverAnimationEnabled = true;
-        
-        // Disable hover animations on touch devices for better performance
-        if ('ontouchstart' in window) {
-            isHoverAnimationEnabled = false;
-        }
-        
-        if (isHoverAnimationEnabled) {
-            document.querySelectorAll('.service-catalog-item, .portfolio-item, .skill-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        }
-
-        // Intersection Observer for animations and lazy loading
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    
-                    // Trigger counter animations if needed
-                    if (entry.target.classList.contains('counter')) {
-                        animateCounter(entry.target);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections and cards
-        document.querySelectorAll('section, .service-catalog-item, .portfolio-item, .skill-card').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Enhanced pulse animation for CTA buttons
-        setInterval(() => {
-            document.querySelectorAll('.btn-primary').forEach(btn => {
-                if (!btn.matches(':hover')) { // Only animate if not being hovered
-                    btn.style.animation = 'pulse 0.6s ease-in-out';
                     setTimeout(() => {
-                        btn.style.animation = '';
-                    }, 600);
-                }
-            });
-        }, 8000);
-
-        // Keyboard navigation support
-        document.addEventListener('keydown', function(e) {
-            // ESC key closes mobile menu
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                        item.style.transition = 'all 0.3s ease';
+                    }, 50);
+                }, index * 100);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
             }
         });
+    });
+});
 
-        // Console welcome message with enhanced styling
-        console.log(`
-        %c
-        ╔══════════════════════════════════════╗
-        ║         José Mario Arias             ║
-        ║       Desarrollador Freelance        ║
-        ║                                      ║
-        ║   📧 josemarioarias12@gmail.com      ║
-        ║   📱 +506 6218-5607                  ║
-        ║   💻 github.com/josemarioarias12     ║
-        ║                                      ║
-        ║   🚀 Portfolio v2.0 Enhanced         ║
-        ║   ✨ Services Catalog Added          ║
-        ║   🎨 Interactive Developer Animation  ║
-        ╚══════════════════════════════════════╝
-        `, 
-        'color: #274C77; font-family: monospace; font-size: 12px; font-weight: bold;'
-        );
+// Form validation functions
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function validateForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    let isValid = true;
+    
+    // Clear previous errors
+    document.querySelectorAll('.error-message').forEach(error => {
+        error.textContent = '';
+    });
+    
+    // Validate name
+    if (!name) {
+        document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre es requerido' : 'Name is required';
+        isValid = false;
+    } else if (name.length < 2) {
+        document.getElementById('name-error').textContent = currentLanguage === 'es' ? 'El nombre debe tener al menos 2 caracteres' : 'Name must be at least 2 characters';
+        isValid = false;
+    }
+    
+    // Validate email
+    if (!email) {
+        document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'El email es requerido' : 'Email is required';
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        document.getElementById('email-error').textContent = currentLanguage === 'es' ? 'Email inválido' : 'Invalid email';
+        isValid = false;
+    }
+    
+    // Validate subject
+    if (!subject) {
+        document.getElementById('subject-error').textContent = currentLanguage === 'es' ? 'El asunto es requerido' : 'Subject is required';
+        isValid = false;
+    }
+    
+    // Validate message
+    if (!message) {
+        document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje es requerido' : 'Message is required';
+        isValid = false;
+    } else if (message.length < 10) {
+        document.getElementById('message-error').textContent = currentLanguage === 'es' ? 'El mensaje debe tener al menos 10 caracteres' : 'Message must be at least 10 characters';
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+function showFormStatus(type, message) {
+    const formStatus = document.getElementById('form-status');
+    formStatus.className = `form-status ${type}`;
+    formStatus.textContent = message;
+    formStatus.style.display = 'block';
+    
+    setTimeout(() => {
+        formStatus.style.display = 'none';
+    }, 5000);
+}
+
+// FORMULARIO DE CONTACTO CORREGIDO - ESTA ES LA PARTE PRINCIPAL QUE NECESITABAS
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (isFormSubmitting) return;
+    
+    if (!validateForm()) {
+        showFormStatus('error', currentLanguage === 'es' ? 'Por favor corrige los errores en el formulario' : 'Please fix the errors in the form');
+        return;
+    }
+    
+    isFormSubmitting = true;
+    const submitBtn = document.getElementById('submit-btn');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${currentLanguage === 'es' ? 'Enviando...' : 'Sending...'}`;
+    submitBtn.disabled = true;
+    
+    try {
+        // Get form data
+        const formData = new FormData(this);
+        const templateParams = {
+            from_name: formData.get('name'),
+            from_email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message'),
+            to_name: 'José Mario Arias',
+            to_email: 'josemarioarias12@gmail.com'
+        };
         
-        console.log('%cSite Performance:', 'color: #F76C5E; font-weight: bold; font-size: 14px;');
-        console.log(`Load Time: ${Math.round(performance.now() - startTime)}ms`);
-        console.log(`Animations: ${isHoverAnimationEnabled ? 'Enabled' : 'Disabled (Touch Device)'}`);
-        console.log(`Language: ${currentLanguage.toUpperCase()}`);
-
-        // Service Worker registration for PWA capabilities (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                // Uncomment to enable service worker
-                // navigator.serviceWorker.register('/sw.js');
+        // ENVÍO REAL CON EMAILJS - YA NO ESTÁ COMENTADO
+        await emailjs.send('service_oiqfl3m', 'template_6mgow2e', templateParams);
+        
+        showFormStatus('success', currentLanguage === 'es' ? '¡Mensaje enviado exitosamente! Te contactaré pronto.' : 'Message sent successfully! I\'ll contact you soon.');
+        this.reset();
+        
+        // Track form submission (Google Analytics example)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submit', {
+                'event_category': 'engagement',
+                'event_label': 'contact_form'
             });
         }
+        
+    } catch (error) {
+        console.error('Error sending email:', error);
+        console.error('Error details:', error.text || error.message);
+        showFormStatus('error', currentLanguage === 'es' ? 'Error al enviar el mensaje. Por favor intenta de nuevo o contacta directamente por WhatsApp.' : 'Error sending message. Please try again or contact directly via WhatsApp.');
+    } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        isFormSubmitting = false;
+    }
+});
 
-        // Web Vitals monitoring (if you have the library)
-        if (typeof webVitals !== 'undefined') {
-            webVitals.getCLS(console.log);
-            webVitals.getFID(console.log);
-            webVitals.getFCP(console.log);
-            webVitals.getLCP(console.log);
-            webVitals.getTTFB(console.log);
+// Real-time form validation
+document.querySelectorAll('#contact-form input, #contact-form textarea').forEach(field => {
+    field.addEventListener('blur', validateForm);
+    field.addEventListener('input', function() {
+        // Clear error message when user starts typing
+        const errorElement = document.getElementById(this.name + '-error');
+        if (errorElement) {
+            errorElement.textContent = '';
         }
+    });
+});
+
+// Download CV Function with analytics
+function downloadCV() {
+    // Track download event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'file_download', {
+            'event_category': 'engagement',
+            'event_label': 'cv_download'
+        });
+    }
+    
+    const link = document.createElement('a');
+    link.href = 'PLANTILLA CV Portafolio Profesional.pdf'; 
+    link.download = 'Jose_Mario_Arias_CV.pdf';
+    link.click();
+}
+
+// Enhanced Language Toggle Function
+function toggleLanguage() {
+    currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
+    const langBtn = document.getElementById('lang-btn');
+    langBtn.textContent = currentLanguage === 'es' ? 'EN' : 'ES';
+    
+    // Update all elements with language attributes
+    document.querySelectorAll('[data-en]').forEach(element => {
+        const text = element.getAttribute(`data-${currentLanguage}`);
+        if (text) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = text;
+            } else {
+                element.textContent = text;
+            }
+        }
+    });
+    
+    // Update placeholders specifically
+    document.querySelectorAll('[data-placeholder-en]').forEach(element => {
+        const placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
+        if (placeholder) {
+            element.placeholder = placeholder;
+        }
+    });
+    
+    // Update HTML lang attribute for accessibility
+    document.documentElement.lang = currentLanguage;
+    
+    // Store language preference
+    localStorage.setItem('preferred-language', currentLanguage);
+}
+
+// Load saved language preference
+const savedLanguage = localStorage.getItem('preferred-language');
+if (savedLanguage && savedLanguage !== currentLanguage) {
+    toggleLanguage();
+}
+
+// Enhanced Typing Animation for Hero
+function typeWriter(element, text, speed = 100) {
+    return new Promise((resolve) => {
+        let i = 0;
+        element.innerHTML = '';
+        element.style.borderRight = '3px solid var(--accent-color)';
+        
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                // Add blinking cursor animation
+                setTimeout(() => {
+                    element.classList.add('typewriter');
+                    resolve();
+                }, 500);
+            }
+        }
+        type();
+    });
+}
+
+// Initialize typing animation when page loads
+window.addEventListener('load', function() {
+    setTimeout(async () => {
+        const heroTitle = document.querySelector('.hero-content h1');
+        if (heroTitle) {
+            const originalText = heroTitle.textContent;
+            await typeWriter(heroTitle, originalText, 80);
+        }
+    }, 1500);
+});
+
+// Enhanced hover effects with performance optimization
+let isHoverAnimationEnabled = true;
+
+// Disable hover animations on touch devices for better performance
+if ('ontouchstart' in window) {
+    isHoverAnimationEnabled = false;
+}
+
+if (isHoverAnimationEnabled) {
+    document.querySelectorAll('.service-catalog-item, .portfolio-item, .skill-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// Intersection Observer for animations and lazy loading
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            
+            // Trigger counter animations if needed
+            if (entry.target.classList.contains('counter')) {
+                animateCounter(entry.target);
+            }
+        }
+    });
+}, observerOptions);
+
+// Observe all sections and cards
+document.querySelectorAll('section, .service-catalog-item, .portfolio-item, .skill-card').forEach(section => {
+    observer.observe(section);
+});
+
+// Enhanced pulse animation for CTA buttons
+setInterval(() => {
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        if (!btn.matches(':hover')) { // Only animate if not being hovered
+            btn.style.animation = 'pulse 0.6s ease-in-out';
+            setTimeout(() => {
+                btn.style.animation = '';
+            }, 600);
+        }
+    });
+}, 8000);
+
+// Keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    // ESC key closes mobile menu
+    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+});
+
+// FUNCIÓN DE PRUEBA - ÚSALA PARA VERIFICAR LA CONFIGURACIÓN
+function testEmailJSConfiguration() {
+    const testParams = {
+        from_name: 'Test Usuario',
+        from_email: 'test@test.com',
+        subject: 'Prueba de configuración EmailJS',
+        message: 'Este es un mensaje de prueba para verificar que EmailJS funciona correctamente.',
+        to_name: 'José Mario Arias',
+        to_email: 'josemarioarias12@gmail.com'
+    };
+    
+    console.log('Enviando email de prueba...');
+    emailjs.send('service_oiqfl3m', 'template_6mgow2e', testParams)
+        .then(function(response) {
+            console.log('✅ Test EXITOSO!', response.status, response.text);
+            alert('Email de prueba enviado exitosamente!');
+        }, function(error) {
+            console.log('❌ Test FALLÓ:', error);
+            alert('Error en el envío: ' + JSON.stringify(error));
+        });
+}
+
+// Console welcome message with enhanced styling
+console.log(`
+%c
+╔══════════════════════════════════════╗
+║         José Mario Arias             ║
+║       Desarrollador Freelance        ║
+║                                      ║
+║   📧 josemarioarias12@gmail.com      ║
+║   📱 +506 6218-5607                  ║
+║   💻 github.com/josemarioarias12     ║
+║                                      ║
+║   🚀 Portfolio v2.0 Enhanced         ║
+║   ✨ EmailJS CORREGIDO               ║
+║   🎨 Interactive Developer Animation  ║
+╚══════════════════════════════════════╝
+`, 
+'color: #274C77; font-family: monospace; font-size: 12px; font-weight: bold;'
+);
+
+console.log('%cPara probar EmailJS, ejecuta: testEmailJSConfiguration()', 'color: #F76C5E; font-weight: bold; font-size: 14px;');
+console.log(`Load Time: ${Math.round(performance.now() - startTime)}ms`);
+console.log(`Animations: ${isHoverAnimationEnabled ? 'Enabled' : 'Disabled (Touch Device)'}`);
+console.log(`Language: ${currentLanguage.toUpperCase()}`);
+
+// Service Worker registration for PWA capabilities (optional)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        // Uncomment to enable service worker
+        // navigator.serviceWorker.register('/sw.js');
+    });
+}
+
+// Web Vitals monitoring (if you have the library)
+if (typeof webVitals !== 'undefined') {
+    webVitals.getCLS(console.log);
+    webVitals.getFID(console.log);
+    webVitals.getFCP(console.log);
+    webVitals.getLCP(console.log);
+    webVitals.getTTFB(console.log);
+}
     </script>
 </body>
 </html>
+
 
 
 
