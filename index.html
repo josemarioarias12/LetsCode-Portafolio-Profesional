@@ -2511,7 +2511,11 @@ function typeWriter(element, text, speed = 100) {
        
         function type() {
             if (i < text.length) {
-                element.innerHTML += text.charAt(i);
+                if (text.charAt(i) === '\n') {
+                    element.innerHTML += '<br>';
+                } else {
+                    element.innerHTML += text.charAt(i);
+                }
                 i++;
                 setTimeout(type, speed);
             } else {
@@ -2531,7 +2535,7 @@ window.addEventListener('load', function() {
     setTimeout(async () => {
         const heroTitle = document.querySelector('.hero-content h1');
         if (heroTitle) {
-            const originalText = heroTitle.textContent;
+            const originalText = "Desarrollador\nFull Stack";
             await typeWriter(heroTitle, originalText, 80);
         }
     }, 1500);
@@ -2670,6 +2674,7 @@ if (typeof webVitals !== 'undefined') {
     </script>
 </body>
 </html>
+
 
 
 
